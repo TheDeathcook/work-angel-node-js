@@ -52,7 +52,6 @@ CREATE TABLE IF NOT EXISTS `work_angel_db`.`Skill` (
   `Skill_ID` INT NOT NULL AUTO_INCREMENT,
   `Name` VARCHAR(45) NULL,
   `Description` VARCHAR(45) NULL,
-  `Skillcol` VARCHAR(45) NULL,
   PRIMARY KEY (`Skill_ID`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
