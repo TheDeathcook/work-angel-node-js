@@ -32,7 +32,7 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "This is the payload: {{payload}} !",
+        "template": "{\"gefunden\":0}",
         "output": "str",
         "x": 860,
         "y": 20,
@@ -81,7 +81,7 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "This is the payload: {{payload}} !",
+        "template": "{\"gefunden\":1}",
         "output": "str",
         "x": 860,
         "y": 100,
@@ -162,7 +162,7 @@
         "type": "function",
         "z": "bdff3fd8.bc0d4",
         "name": "Insert Data",
-        "func": "msg.topic = \"insert into user (lastname, forename, description, username, password, salt , userpicture) values ('\"+msg.payload.lastname+\"','\"+msg.payload.forename+\"','\"+msg.payload.description+\"','\"+msg.payload.username+\"','\"+msg.payload.password+\"','\"+msg.payload.salt+\"','\"+msg.payload.userpicture+\"')\";\nreturn msg;",
+        "func": "//msg.topic = \"insert into user (lastname, forename, description, username, password, salt , userpicture) values ('\"+msg.payload.lastname+\"','\"+msg.payload.forename+\"','\"+msg.payload.description+\"','\"+msg.payload.username+\"','\"+msg.payload.password+\"','\"+msg.payload.salt+\"','\"+msg.payload.userpicture+\"')\";\nmsg.topic = \"insert into user (username, password) values ('\"+msg.payload.username+\"','\"+msg.payload.password+\"')\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 250,
@@ -215,8 +215,8 @@
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 80,
-        "y": 500,
+        "x": 100,
+        "y": 740,
         "wires": [
             [
                 "22a6cd05.476ed2"
@@ -231,8 +231,8 @@
         "func": "msg.topic = \"insert into matches (employer_employer_id,user_user_id,compability,user_accepted,employer_accepted) values('\"+msg.payload.employer+\"','\"+msg.payload.user+\"','\"+msg.payload.compability+\"','\"+msg.payload.user_accepted+\"','\"+msg.payload.employer_accepted+\"')\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 260,
-        "y": 500,
+        "x": 280,
+        "y": 740,
         "wires": [
             [
                 "5aada1c4.6068a"
@@ -245,8 +245,8 @@
         "z": "bdff3fd8.bc0d4",
         "mydb": "cee63ff4.fc65e8",
         "name": "WA",
-        "x": 430,
-        "y": 500,
+        "x": 450,
+        "y": 740,
         "wires": [
             [
                 "862489fd.c40758"
@@ -264,8 +264,8 @@
         "syntax": "mustache",
         "template": "This is the payload: {{payload}} !",
         "output": "str",
-        "x": 550,
-        "y": 520,
+        "x": 570,
+        "y": 760,
         "wires": [
             [
                 "a048bf8b.9e9038"
@@ -281,8 +281,8 @@
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 90,
-        "y": 600,
+        "x": 110,
+        "y": 840,
         "wires": [
             [
                 "2607eabf.5d0e66"
@@ -297,8 +297,8 @@
         "func": "msg.topic = \"select * from matches where user_accepted = 'Y' and employer_accepted = 'Y'\"\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 280,
-        "y": 600,
+        "x": 300,
+        "y": 840,
         "wires": [
             [
                 "696c8023.306798"
@@ -311,8 +311,8 @@
         "z": "bdff3fd8.bc0d4",
         "mydb": "cee63ff4.fc65e8",
         "name": "WA",
-        "x": 430,
-        "y": 600,
+        "x": 450,
+        "y": 840,
         "wires": [
             [
                 "2b52d3fe.8bf9b4"
@@ -330,8 +330,8 @@
         "syntax": "mustache",
         "template": "This is the payload: {{payload}} !",
         "output": "str",
-        "x": 550,
-        "y": 580,
+        "x": 570,
+        "y": 820,
         "wires": [
             [
                 "a048bf8b.9e9038"
@@ -346,8 +346,8 @@
         "links": [
             "c05b11b1.2fd4f8"
         ],
-        "x": 695,
-        "y": 540,
+        "x": 715,
+        "y": 780,
         "wires": []
     },
     {
@@ -448,7 +448,7 @@
         "type": "function",
         "z": "bdff3fd8.bc0d4",
         "name": "Insert Data",
-        "func": "msg.topic = \"insert into employer (name,username,password,salt,employerpicture,description) values ('\"+msg.payload.name+\"','\"+msg.payload.username+\"','\"+msg.payload.password+\"','\"+msg.payload.salt+\"','\"+msg.payload.employerpicture+\"','\"+msg.payload.description+\"')\";\nreturn msg;",
+        "func": "//msg.topic = \"insert into employer (name,username,password,salt,employerpicture,description) values ('\"+msg.payload.name+\"','\"+msg.payload.username+\"','\"+msg.payload.password+\"','\"+msg.payload.salt+\"','\"+msg.payload.employerpicture+\"','\"+msg.payload.description+\"')\";\nmsg.topic = \"insert into employer (username, password) values ('\"+msg.payload.username+\"','\"+msg.payload.password+\"')\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 250,
@@ -513,8 +513,8 @@
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 100,
-        "y": 760,
+        "x": 80,
+        "y": 940,
         "wires": [
             [
                 "c53898ac.06b4f8"
@@ -529,8 +529,8 @@
         "func": "msg.topic = \"delete from user where username = '\"+msg.payload.user+\"'\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 270,
-        "y": 760,
+        "x": 250,
+        "y": 940,
         "wires": [
             [
                 "79663101.6c8a1"
@@ -543,8 +543,8 @@
         "z": "bdff3fd8.bc0d4",
         "mydb": "cee63ff4.fc65e8",
         "name": "WA",
-        "x": 420,
-        "y": 760,
+        "x": 400,
+        "y": 940,
         "wires": [
             [
                 "5b487ae2.c479dc"
@@ -562,8 +562,8 @@
         "syntax": "mustache",
         "template": "This is the payload: {{payload}} !",
         "output": "str",
-        "x": 580,
-        "y": 740,
+        "x": 560,
+        "y": 920,
         "wires": [
             [
                 "6193a63f.a5b0d8"
@@ -578,8 +578,8 @@
         "links": [
             "c05b11b1.2fd4f8"
         ],
-        "x": 715,
-        "y": 740,
+        "x": 695,
+        "y": 920,
         "wires": []
     },
     {
@@ -591,8 +591,8 @@
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 100,
-        "y": 820,
+        "x": 80,
+        "y": 1000,
         "wires": [
             [
                 "13bbcc2e.83275c"
@@ -607,8 +607,8 @@
         "func": "msg.topic = \"delete from employer where username = '\" + msg.payload.employer+\"'\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 290,
-        "y": 820,
+        "x": 270,
+        "y": 1000,
         "wires": [
             [
                 "17a2aa57.80b546"
@@ -621,8 +621,8 @@
         "z": "bdff3fd8.bc0d4",
         "mydb": "cee63ff4.fc65e8",
         "name": "WA",
-        "x": 450,
-        "y": 820,
+        "x": 430,
+        "y": 1000,
         "wires": [
             [
                 "1cb185f3.e0b6f2"
@@ -640,8 +640,8 @@
         "syntax": "mustache",
         "template": "This is the payload: {{payload}} !",
         "output": "str",
-        "x": 610,
-        "y": 800,
+        "x": 590,
+        "y": 980,
         "wires": [
             [
                 "21a38900.3bf018"
@@ -656,8 +656,8 @@
         "links": [
             "c05b11b1.2fd4f8"
         ],
-        "x": 755,
-        "y": 800,
+        "x": 735,
+        "y": 980,
         "wires": []
     },
     {
@@ -815,8 +815,8 @@
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 110,
-        "y": 940,
+        "x": 100,
+        "y": 1080,
         "wires": [
             [
                 "5d3cd54f.a6049c"
@@ -831,8 +831,8 @@
         "func": "msg.topic = \"insert into user_has_skill (user_user_id,skill_skill_id,level) values ('\"+msg.payload.user_id+\"','\"+msg.payload.skill_id+\"','\"+msg.payload.level+\"')\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 260,
-        "y": 940,
+        "x": 250,
+        "y": 1080,
         "wires": [
             [
                 "4dad9196.d6c758"
@@ -845,8 +845,8 @@
         "z": "bdff3fd8.bc0d4",
         "mydb": "cee63ff4.fc65e8",
         "name": "WA",
-        "x": 430,
-        "y": 940,
+        "x": 420,
+        "y": 1080,
         "wires": [
             [
                 "8b74568a.be7e1"
@@ -861,8 +861,8 @@
         "links": [
             "c05b11b1.2fd4f8"
         ],
-        "x": 535,
-        "y": 940,
+        "x": 525,
+        "y": 1080,
         "wires": []
     },
     {
@@ -874,8 +874,8 @@
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 110,
-        "y": 1080,
+        "x": 100,
+        "y": 1220,
         "wires": [
             [
                 "8cf79308.3f007"
@@ -888,8 +888,8 @@
         "z": "bdff3fd8.bc0d4",
         "mydb": "cee63ff4.fc65e8",
         "name": "WA",
-        "x": 380,
-        "y": 1080,
+        "x": 370,
+        "y": 1220,
         "wires": [
             [
                 "1f104b1.b6df035"
@@ -904,8 +904,8 @@
         "func": "msg.topic = \"select * from skills\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 250,
-        "y": 1080,
+        "x": 240,
+        "y": 1220,
         "wires": [
             [
                 "61fe95d1.c9aad4"
@@ -920,8 +920,8 @@
         "links": [
             "c05b11b1.2fd4f8"
         ],
-        "x": 505,
-        "y": 1080,
+        "x": 495,
+        "y": 1220,
         "wires": []
     },
     {
@@ -933,8 +933,8 @@
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 90,
-        "y": 980,
+        "x": 80,
+        "y": 1120,
         "wires": [
             [
                 "512529d4.a2f308"
@@ -949,8 +949,8 @@
         "func": "msg.topic = \"insert into employer_needs_skill (employer_employer_id,skill_skill_id) values ('\"+msg.payload.employer_id+\"','\"+msg.payload.skill_id+\"')\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 240,
-        "y": 980,
+        "x": 230,
+        "y": 1120,
         "wires": [
             [
                 "3e06d114.7ab8c6"
@@ -963,8 +963,8 @@
         "z": "bdff3fd8.bc0d4",
         "mydb": "cee63ff4.fc65e8",
         "name": "WA",
-        "x": 390,
-        "y": 980,
+        "x": 380,
+        "y": 1120,
         "wires": [
             [
                 "2fc1fe86.00f75a"
@@ -979,9 +979,99 @@
         "links": [
             "c05b11b1.2fd4f8"
         ],
-        "x": 495,
-        "y": 980,
+        "x": 485,
+        "y": 1120,
         "wires": []
+    },
+    {
+        "id": "c1a5807d.cd6c18",
+        "type": "http in",
+        "z": "bdff3fd8.bc0d4",
+        "name": "UpdateEmployer",
+        "url": "/setDataEmp",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 100,
+        "y": 580,
+        "wires": [
+            [
+                "80dac2b7.00808"
+            ]
+        ]
+    },
+    {
+        "id": "c8b4b135.cfd3a8",
+        "type": "http in",
+        "z": "bdff3fd8.bc0d4",
+        "name": "UpdateUser",
+        "url": "/setDataUser",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 100,
+        "y": 500,
+        "wires": [
+            [
+                "efdc255.e74a0d8"
+            ]
+        ]
+    },
+    {
+        "id": "efdc255.e74a0d8",
+        "type": "function",
+        "z": "bdff3fd8.bc0d4",
+        "name": "",
+        "func": "msg.topic = \"update user set lastname = '\"+msg.payload.lastname+\"', forename = '\"+msg.payload.forename+\"', description = '\"+msg.payload.descr+\"', userpicture = '\"+msg.payload.userpicture+\"', salt = '\"+msg.payload.salt+ \"' where username = '\"+msg.payload.user+\"'\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 270,
+        "y": 500,
+        "wires": [
+            [
+                "ad40322f.a84cd8"
+            ]
+        ]
+    },
+    {
+        "id": "80dac2b7.00808",
+        "type": "function",
+        "z": "bdff3fd8.bc0d4",
+        "name": "",
+        "func": "msg.topic = \"update employer set name = '\"+msg.payload.name+\"', employerpicture = '\"+msg.payload.employerpicture+\"', description = '\"+msg.payload.descr+\"', salt = '\"+msg.payload.salt+\"' where username = '\"+msg.payload.username+\"'\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 270,
+        "y": 580,
+        "wires": [
+            [
+                "3c068361.7b50ac"
+            ]
+        ]
+    },
+    {
+        "id": "ad40322f.a84cd8",
+        "type": "mysql",
+        "z": "bdff3fd8.bc0d4",
+        "mydb": "cee63ff4.fc65e8",
+        "name": "WA",
+        "x": 430,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3c068361.7b50ac",
+        "type": "mysql",
+        "z": "bdff3fd8.bc0d4",
+        "mydb": "cee63ff4.fc65e8",
+        "name": "WA",
+        "x": 430,
+        "y": 580,
+        "wires": [
+            []
+        ]
     },
     {
         "id": "cee63ff4.fc65e8",
