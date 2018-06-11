@@ -32,7 +32,7 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "{\"gefunden\":0}",
+        "template": "{\n\"login\": 1\n}",
         "output": "str",
         "x": 860,
         "y": 20,
@@ -81,7 +81,7 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "{\"gefunden\":1}",
+        "template": "{\n\"login\":1\n}",
         "output": "str",
         "x": 860,
         "y": 100,
@@ -183,25 +183,6 @@
         "y": 320,
         "wires": [
             [
-                "aeb7ce66.1cd7f8"
-            ]
-        ]
-    },
-    {
-        "id": "aeb7ce66.1cd7f8",
-        "type": "template",
-        "z": "bdff3fd8.bc0d4",
-        "name": "",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "This is the payload: {{payload}} !",
-        "output": "str",
-        "x": 560,
-        "y": 300,
-        "wires": [
-            [
                 "c9062c56.2deac8"
             ]
         ]
@@ -228,7 +209,7 @@
         "type": "function",
         "z": "bdff3fd8.bc0d4",
         "name": "Insert Matches",
-        "func": "msg.topic = \"insert into matches (employer_employer_id,user_user_id,compability,user_accepted,employer_accepted) values('\"+msg.payload.employer+\"','\"+msg.payload.user+\"','\"+msg.payload.compability+\"','\"+msg.payload.user_accepted+\"','\"+msg.payload.employer_accepted+\"')\";\nreturn msg;",
+        "func": "msg.topic = \"insert into matches (employer_employer_id,user_user_id,compability,user_accepted,employer_accepted) values('\"+msg.payload.employer_id+\"','\"+msg.payload.user_id+\"','\"+msg.payload.compability+\"','\"+msg.payload.user_accepted+\"','\"+msg.payload.employer_accepted+\"')\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 280,
@@ -247,25 +228,6 @@
         "name": "WA",
         "x": 450,
         "y": 740,
-        "wires": [
-            [
-                "862489fd.c40758"
-            ]
-        ]
-    },
-    {
-        "id": "862489fd.c40758",
-        "type": "template",
-        "z": "bdff3fd8.bc0d4",
-        "name": "",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "This is the payload: {{payload}} !",
-        "output": "str",
-        "x": 570,
-        "y": 760,
         "wires": [
             [
                 "a048bf8b.9e9038"
@@ -315,25 +277,6 @@
         "y": 840,
         "wires": [
             [
-                "2b52d3fe.8bf9b4"
-            ]
-        ]
-    },
-    {
-        "id": "2b52d3fe.8bf9b4",
-        "type": "template",
-        "z": "bdff3fd8.bc0d4",
-        "name": "",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "This is the payload: {{payload}} !",
-        "output": "str",
-        "x": 570,
-        "y": 820,
-        "wires": [
-            [
                 "a048bf8b.9e9038"
             ]
         ]
@@ -346,8 +289,8 @@
         "links": [
             "c05b11b1.2fd4f8"
         ],
-        "x": 715,
-        "y": 780,
+        "x": 575,
+        "y": 800,
         "wires": []
     },
     {
@@ -365,7 +308,9 @@
             "a435fbb7.4c747",
             "8b74568a.be7e1",
             "1f104b1.b6df035",
-            "2fc1fe86.00f75a"
+            "2fc1fe86.00f75a",
+            "6c8d9306.13961c",
+            "b6dd63c3.2cfae"
         ],
         "x": 995,
         "y": 280,
@@ -422,8 +367,8 @@
         "links": [
             "c05b11b1.2fd4f8"
         ],
-        "x": 695,
-        "y": 300,
+        "x": 535,
+        "y": 340,
         "wires": []
     },
     {
@@ -469,40 +414,9 @@
         "y": 380,
         "wires": [
             [
-                "26b41db8.0e74fa"
+                "c9062c56.2deac8"
             ]
         ]
-    },
-    {
-        "id": "26b41db8.0e74fa",
-        "type": "template",
-        "z": "bdff3fd8.bc0d4",
-        "name": "",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "This is the payload: {{payload}} !",
-        "output": "str",
-        "x": 560,
-        "y": 360,
-        "wires": [
-            [
-                "fd2ab185.e346f8"
-            ]
-        ]
-    },
-    {
-        "id": "fd2ab185.e346f8",
-        "type": "link out",
-        "z": "bdff3fd8.bc0d4",
-        "name": "Out Format",
-        "links": [
-            "c05b11b1.2fd4f8"
-        ],
-        "x": 695,
-        "y": 360,
-        "wires": []
     },
     {
         "id": "3be39fda.69a3e",
@@ -547,47 +461,16 @@
         "y": 940,
         "wires": [
             [
-                "5b487ae2.c479dc"
+                "21a38900.3bf018"
             ]
         ]
-    },
-    {
-        "id": "5b487ae2.c479dc",
-        "type": "template",
-        "z": "bdff3fd8.bc0d4",
-        "name": "",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "This is the payload: {{payload}} !",
-        "output": "str",
-        "x": 560,
-        "y": 920,
-        "wires": [
-            [
-                "6193a63f.a5b0d8"
-            ]
-        ]
-    },
-    {
-        "id": "6193a63f.a5b0d8",
-        "type": "link out",
-        "z": "bdff3fd8.bc0d4",
-        "name": "Out Format",
-        "links": [
-            "c05b11b1.2fd4f8"
-        ],
-        "x": 695,
-        "y": 920,
-        "wires": []
     },
     {
         "id": "558c6d8d.cb35cc",
         "type": "http in",
         "z": "bdff3fd8.bc0d4",
         "name": "DeleteEmp",
-        "url": "/DeleteEmployee",
+        "url": "/DeleteEmployer",
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
@@ -625,25 +508,6 @@
         "y": 1000,
         "wires": [
             [
-                "1cb185f3.e0b6f2"
-            ]
-        ]
-    },
-    {
-        "id": "1cb185f3.e0b6f2",
-        "type": "template",
-        "z": "bdff3fd8.bc0d4",
-        "name": "",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "This is the payload: {{payload}} !",
-        "output": "str",
-        "x": 590,
-        "y": 980,
-        "wires": [
-            [
                 "21a38900.3bf018"
             ]
         ]
@@ -656,8 +520,8 @@
         "links": [
             "c05b11b1.2fd4f8"
         ],
-        "x": 735,
-        "y": 980,
+        "x": 595,
+        "y": 960,
         "wires": []
     },
     {
@@ -674,25 +538,6 @@
         "wires": [
             [
                 "8455b483.5977d"
-            ]
-        ]
-    },
-    {
-        "id": "eb256a8a.467a48",
-        "type": "template",
-        "z": "bdff3fd8.bc0d4",
-        "name": "Format - Fehler",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "This is the payload: {{payload}} !",
-        "output": "str",
-        "x": 860,
-        "y": 140,
-        "wires": [
-            [
-                "a435fbb7.4c747"
             ]
         ]
     },
@@ -723,25 +568,6 @@
         "wires": [
             [
                 "2d20e368.60ba24"
-            ]
-        ]
-    },
-    {
-        "id": "abc5caaa.c0183",
-        "type": "template",
-        "z": "bdff3fd8.bc0d4",
-        "name": "Format",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "This is the payload: {{payload}} !",
-        "output": "str",
-        "x": 860,
-        "y": 220,
-        "wires": [
-            [
-                "a435fbb7.4c747"
             ]
         ]
     },
@@ -989,7 +815,7 @@
         "z": "bdff3fd8.bc0d4",
         "name": "UpdateEmployer",
         "url": "/setDataEmp",
-        "method": "get",
+        "method": "post",
         "upload": false,
         "swaggerDoc": "",
         "x": 100,
@@ -1006,7 +832,7 @@
         "z": "bdff3fd8.bc0d4",
         "name": "UpdateUser",
         "url": "/setDataUser",
-        "method": "get",
+        "method": "post",
         "upload": false,
         "swaggerDoc": "",
         "x": 100,
@@ -1022,7 +848,7 @@
         "type": "function",
         "z": "bdff3fd8.bc0d4",
         "name": "",
-        "func": "msg.topic = \"update user set lastname = '\"+msg.payload.lastname+\"', forename = '\"+msg.payload.forename+\"', description = '\"+msg.payload.descr+\"', userpicture = '\"+msg.payload.userpicture+\"', salt = '\"+msg.payload.salt+ \"' where username = '\"+msg.payload.user+\"'\";\nreturn msg;",
+        "func": "msg.topic = \"update user set lastname = '\"+msg.payload.lastname+\"', forename = '\"+msg.payload.forename+\"', description = '\"+msg.payload.descr+\"', userpicture = '\"+msg.payload.userpicture+\"', salt = '\"+msg.payload.salt+ \"' where username = '\"+msg.payload.username+\"'\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 270,
@@ -1038,7 +864,7 @@
         "type": "function",
         "z": "bdff3fd8.bc0d4",
         "name": "",
-        "func": "msg.topic = \"update employer set name = '\"+msg.payload.name+\"', employerpicture = '\"+msg.payload.employerpicture+\"', description = '\"+msg.payload.descr+\"', salt = '\"+msg.payload.salt+\"' where username = '\"+msg.payload.username+\"'\";\nreturn msg;",
+        "func": "msg.topic = \"update employer set name = '\"+msg.payload.name+\"', employerpicture = '\"+msg.payload.employerpicture+\"', description = '\"+msg.payload.descr+\"', salt = '\"+msg.payload.salt+\"' where username = '\"+msg.payload.employername+\"'\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 270,
@@ -1058,7 +884,9 @@
         "x": 430,
         "y": 500,
         "wires": [
-            []
+            [
+                "6c8d9306.13961c"
+            ]
         ]
     },
     {
@@ -1070,7 +898,59 @@
         "x": 430,
         "y": 580,
         "wires": [
-            []
+            [
+                "6c8d9306.13961c"
+            ]
+        ]
+    },
+    {
+        "id": "6c8d9306.13961c",
+        "type": "link out",
+        "z": "bdff3fd8.bc0d4",
+        "name": "Out Format",
+        "links": [
+            "c05b11b1.2fd4f8"
+        ],
+        "x": 555,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "eb256a8a.467a48",
+        "type": "template",
+        "z": "bdff3fd8.bc0d4",
+        "name": "Format - Fehler",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n\"login\": 0\n}",
+        "output": "str",
+        "x": 860,
+        "y": 140,
+        "wires": [
+            [
+                "a435fbb7.4c747"
+            ]
+        ]
+    },
+    {
+        "id": "abc5caaa.c0183",
+        "type": "template",
+        "z": "bdff3fd8.bc0d4",
+        "name": "Format",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n\"login\": 1\n}",
+        "output": "str",
+        "x": 860,
+        "y": 220,
+        "wires": [
+            [
+                "a435fbb7.4c747"
+            ]
         ]
     },
     {
