@@ -1,27 +1,41 @@
 [
     {
-        "id": "8b8a7b34.f5c22",
-        "type": "template",
-        "z": "bdff3fd8.bc0d4",
-        "name": "Format - Fehler",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "This is the payload: {{payload}} !",
-        "output": "str",
-        "x": 860,
-        "y": 20,
+        "id": "fbef2e31.6cba7",
+        "type": "switch",
+        "z": "f1d5e28c.51cc3",
+        "name": "",
+        "property": "compare",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "2",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 690,
+        "y": 200,
         "wires": [
             [
-                "41b503ba.4f796c"
+                "aafe8075.b734b"
+            ],
+            [
+                "3eeb6e89.ec4612"
             ]
         ]
     },
     {
-        "id": "da6bada7.a793e8",
+        "id": "947ec3e4.12e2b",
         "type": "http in",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f1d5e28c.51cc3",
         "name": "LoginUser",
         "url": "/loginUser",
         "method": "post",
@@ -31,28 +45,28 @@
         "y": 80,
         "wires": [
             [
-                "fc212caf.5069a"
+                "ef30a471.49b178"
             ]
         ]
     },
     {
-        "id": "ded95f1c.4364f8",
+        "id": "61f12f6e.f52ab",
         "type": "mysql",
-        "z": "bdff3fd8.bc0d4",
-        "mydb": "cee63ff4.fc65e8",
+        "z": "f1d5e28c.51cc3",
+        "mydb": "3379ef25.fa932",
         "name": "WA",
         "x": 370,
         "y": 80,
         "wires": [
             [
-                "3e7fea4.53cb696"
+                "537d52dc.03490c"
             ]
         ]
     },
     {
-        "id": "fc212caf.5069a",
+        "id": "ef30a471.49b178",
         "type": "function",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f1d5e28c.51cc3",
         "name": "Get ID/PW",
         "func": "msg.password = msg.payload.password;\nmsg.topic = \"select * from user where username = '\" + msg.payload.user+\"'\";\n\nreturn msg;",
         "outputs": 1,
@@ -61,82 +75,14 @@
         "y": 80,
         "wires": [
             [
-                "ded95f1c.4364f8"
+                "61f12f6e.f52ab"
             ]
         ]
     },
     {
-        "id": "a7267094.130a1",
-        "type": "template",
-        "z": "bdff3fd8.bc0d4",
-        "name": "Format",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "This is the payload: {{payload}} !",
-        "output": "str",
-        "x": 860,
-        "y": 100,
-        "wires": [
-            [
-                "41b503ba.4f796c"
-            ]
-        ]
-    },
-    {
-        "id": "3e7fea4.53cb696",
-        "type": "function",
-        "z": "bdff3fd8.bc0d4",
-        "name": "Compare Data",
-        "func": "if(msg.payload.password == msg.password){\n    msg.compare = 1;\n}else{\n    msg.compare = 2;\n}\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 540,
-        "y": 80,
-        "wires": [
-            [
-                "de0c50de.2c051"
-            ]
-        ]
-    },
-    {
-        "id": "de0c50de.2c051",
-        "type": "switch",
-        "z": "bdff3fd8.bc0d4",
-        "name": "",
-        "property": "compare",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "1",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "2",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 690,
-        "y": 80,
-        "wires": [
-            [
-                "8b8a7b34.f5c22"
-            ],
-            [
-                "a7267094.130a1"
-            ]
-        ]
-    },
-    {
-        "id": "dd9cbb7c.82c2c",
+        "id": "f52824e4.da23b8",
         "type": "http in",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f1d5e28c.51cc3",
         "name": "RegiUser",
         "url": "/regi",
         "method": "post",
@@ -146,232 +92,177 @@
         "y": 320,
         "wires": [
             [
-                "8a535f6f.3f23d"
+                "1f48d9df.332dd6"
             ]
         ]
     },
     {
-        "id": "8a535f6f.3f23d",
+        "id": "1f48d9df.332dd6",
         "type": "function",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f1d5e28c.51cc3",
         "name": "Insert Data",
-        "func": "msg.topic = \"insert into user (lastname, forename, description, username, password, salt , userpicture) values ('\"+msg.payload.lastname+\"','\"+msg.payload.forename+\"','\"+msg.payload.description+\"','\"+msg.payload.username+\"','\"+msg.payload.password+\"','\"+msg.payload.salt+\"','\"+msg.payload.userpicture+\"')\";\nreturn msg;",
+        "func": "//msg.topic = \"insert into user (lastname, forename, description, username, password, salt , userpicture) values ('\"+msg.payload.lastname+\"','\"+msg.payload.forename+\"','\"+msg.payload.description+\"','\"+msg.payload.username+\"','\"+msg.payload.password+\"','\"+msg.payload.salt+\"','\"+msg.payload.userpicture+\"')\";\nmsg.topic = \"insert into user (username, password) values ('\"+msg.payload.username+\"','\"+msg.payload.password+\"')\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 250,
         "y": 320,
         "wires": [
             [
-                "95201721.908eb"
+                "31562ff4.edc39"
             ]
         ]
     },
     {
-        "id": "95201721.908eb",
+        "id": "31562ff4.edc39",
         "type": "mysql",
-        "z": "bdff3fd8.bc0d4",
-        "mydb": "cee63ff4.fc65e8",
+        "z": "f1d5e28c.51cc3",
+        "mydb": "3379ef25.fa932",
         "name": "WA",
         "x": 400,
         "y": 320,
         "wires": [
             [
-                "aeb7ce66.1cd7f8"
+                "590a3a7f.343e74"
             ]
         ]
     },
     {
-        "id": "aeb7ce66.1cd7f8",
-        "type": "template",
-        "z": "bdff3fd8.bc0d4",
-        "name": "",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "This is the payload: {{payload}} !",
-        "output": "str",
-        "x": 560,
-        "y": 300,
-        "wires": [
-            [
-                "c9062c56.2deac8"
-            ]
-        ]
-    },
-    {
-        "id": "7bf9eee8.9826e",
+        "id": "e599709f.377e9",
         "type": "http in",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f1d5e28c.51cc3",
         "name": "Matches",
         "url": "/matches",
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 80,
-        "y": 500,
+        "x": 100,
+        "y": 740,
         "wires": [
             [
-                "22a6cd05.476ed2"
+                "65d1711c.eb222"
             ]
         ]
     },
     {
-        "id": "22a6cd05.476ed2",
+        "id": "65d1711c.eb222",
         "type": "function",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f1d5e28c.51cc3",
         "name": "Insert Matches",
-        "func": "msg.topic = \"insert into matches (employer_employer_id,user_user_id,compability,user_accepted,employer_accepted) values('\"+msg.payload.employer+\"','\"+msg.payload.user+\"','\"+msg.payload.compability+\"','\"+msg.payload.user_accepted+\"','\"+msg.payload.employer_accepted+\"')\";\nreturn msg;",
+        "func": "msg.topic = \"insert into matches (employer_employer_id,user_user_id,compability,user_accepted,employer_accepted) values('\"+msg.payload.employer_id+\"','\"+msg.payload.user_id+\"','\"+msg.payload.compability+\"','\"+msg.payload.user_accepted+\"','\"+msg.payload.employer_accepted+\"')\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 260,
-        "y": 500,
+        "x": 280,
+        "y": 740,
         "wires": [
             [
-                "5aada1c4.6068a"
+                "e3a2bebd.748a8"
             ]
         ]
     },
     {
-        "id": "5aada1c4.6068a",
+        "id": "e3a2bebd.748a8",
         "type": "mysql",
-        "z": "bdff3fd8.bc0d4",
-        "mydb": "cee63ff4.fc65e8",
+        "z": "f1d5e28c.51cc3",
+        "mydb": "3379ef25.fa932",
         "name": "WA",
-        "x": 430,
-        "y": 500,
+        "x": 450,
+        "y": 740,
         "wires": [
             [
-                "862489fd.c40758"
+                "b07bb180.4f65f"
             ]
         ]
     },
     {
-        "id": "862489fd.c40758",
-        "type": "template",
-        "z": "bdff3fd8.bc0d4",
-        "name": "",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "This is the payload: {{payload}} !",
-        "output": "str",
-        "x": 550,
-        "y": 520,
-        "wires": [
-            [
-                "a048bf8b.9e9038"
-            ]
-        ]
-    },
-    {
-        "id": "644a73fc.4df86c",
+        "id": "29582525.bb0c8a",
         "type": "http in",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f1d5e28c.51cc3",
         "name": "Get Matches",
         "url": "/getMatches",
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 90,
-        "y": 600,
+        "x": 110,
+        "y": 840,
         "wires": [
             [
-                "2607eabf.5d0e66"
+                "e230e129.7c6e1"
             ]
         ]
     },
     {
-        "id": "2607eabf.5d0e66",
+        "id": "e230e129.7c6e1",
         "type": "function",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f1d5e28c.51cc3",
         "name": "Get Matches ??",
         "func": "msg.topic = \"select * from matches where user_accepted = 'Y' and employer_accepted = 'Y'\"\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 280,
-        "y": 600,
+        "x": 300,
+        "y": 840,
         "wires": [
             [
-                "696c8023.306798"
+                "d37c4253.8ccc"
             ]
         ]
     },
     {
-        "id": "696c8023.306798",
+        "id": "d37c4253.8ccc",
         "type": "mysql",
-        "z": "bdff3fd8.bc0d4",
-        "mydb": "cee63ff4.fc65e8",
+        "z": "f1d5e28c.51cc3",
+        "mydb": "3379ef25.fa932",
         "name": "WA",
-        "x": 430,
-        "y": 600,
+        "x": 450,
+        "y": 840,
         "wires": [
             [
-                "2b52d3fe.8bf9b4"
+                "b07bb180.4f65f"
             ]
         ]
     },
     {
-        "id": "2b52d3fe.8bf9b4",
-        "type": "template",
-        "z": "bdff3fd8.bc0d4",
-        "name": "",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "This is the payload: {{payload}} !",
-        "output": "str",
-        "x": 550,
-        "y": 580,
-        "wires": [
-            [
-                "a048bf8b.9e9038"
-            ]
-        ]
-    },
-    {
-        "id": "a048bf8b.9e9038",
+        "id": "b07bb180.4f65f",
         "type": "link out",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f1d5e28c.51cc3",
         "name": "Out Format",
         "links": [
-            "c05b11b1.2fd4f8"
+            "2ed4261a.c0b28a"
         ],
-        "x": 695,
-        "y": 540,
+        "x": 575,
+        "y": 800,
         "wires": []
     },
     {
-        "id": "c05b11b1.2fd4f8",
+        "id": "2ed4261a.c0b28a",
         "type": "link in",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f1d5e28c.51cc3",
         "name": "",
         "links": [
-            "a048bf8b.9e9038",
-            "41b503ba.4f796c",
-            "c9062c56.2deac8",
+            "b07bb180.4f65f",
+            "8900b7a0.c9be08",
+            "590a3a7f.343e74",
             "fd2ab185.e346f8",
             "6193a63f.a5b0d8",
-            "21a38900.3bf018",
-            "a435fbb7.4c747",
-            "8b74568a.be7e1",
-            "1f104b1.b6df035",
-            "2fc1fe86.00f75a"
+            "a9f035f8.487108",
+            "c50b674f.72ddf8",
+            "4d3d636b.720dbc",
+            "90005513.f0cfe8",
+            "731c6740.cb2688",
+            "b50aa741.c9acd8",
+            "b6dd63c3.2cfae"
         ],
         "x": 995,
         "y": 280,
         "wires": [
             [
-                "198f209e.b778bf"
+                "ec3c6855.fdd538"
             ]
         ]
     },
     {
-        "id": "f877fc3b.610bc8",
+        "id": "767273d7.101d0c",
         "type": "http response",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f1d5e28c.51cc3",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -380,9 +271,9 @@
         "wires": []
     },
     {
-        "id": "198f209e.b778bf",
+        "id": "ec3c6855.fdd538",
         "type": "json",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f1d5e28c.51cc3",
         "name": "",
         "property": "payload",
         "action": "",
@@ -391,38 +282,38 @@
         "y": 280,
         "wires": [
             [
-                "f877fc3b.610bc8"
+                "767273d7.101d0c"
             ]
         ]
     },
     {
-        "id": "41b503ba.4f796c",
+        "id": "8900b7a0.c9be08",
         "type": "link out",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f1d5e28c.51cc3",
         "name": "Out Format",
         "links": [
-            "c05b11b1.2fd4f8"
+            "2ed4261a.c0b28a"
         ],
         "x": 1035,
         "y": 60,
         "wires": []
     },
     {
-        "id": "c9062c56.2deac8",
+        "id": "590a3a7f.343e74",
         "type": "link out",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f1d5e28c.51cc3",
         "name": "Out Format",
         "links": [
-            "c05b11b1.2fd4f8"
+            "2ed4261a.c0b28a"
         ],
-        "x": 695,
-        "y": 300,
+        "x": 535,
+        "y": 340,
         "wires": []
     },
     {
-        "id": "453fd240.9e0b2c",
+        "id": "33668b12.a21e94",
         "type": "http in",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f1d5e28c.51cc3",
         "name": "RegiEmp",
         "url": "/regiemployee",
         "method": "post",
@@ -432,231 +323,150 @@
         "y": 380,
         "wires": [
             [
-                "19e4309a.ffc097"
+                "603cf70c.189d98"
             ]
         ]
     },
     {
-        "id": "19e4309a.ffc097",
+        "id": "603cf70c.189d98",
         "type": "function",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f1d5e28c.51cc3",
         "name": "Insert Data",
-        "func": "msg.topic = \"insert into employer (name,username,password,salt,employerpicture,description) values ('\"+msg.payload.name+\"','\"+msg.payload.username+\"','\"+msg.payload.password+\"','\"+msg.payload.salt+\"','\"+msg.payload.employerpicture+\"','\"+msg.payload.description+\"')\";\nreturn msg;",
+        "func": "//msg.topic = \"insert into employer (name,username,password,salt,employerpicture,description) values ('\"+msg.payload.name+\"','\"+msg.payload.username+\"','\"+msg.payload.password+\"','\"+msg.payload.salt+\"','\"+msg.payload.employerpicture+\"','\"+msg.payload.description+\"')\";\nmsg.topic = \"insert into employer (username, password) values ('\"+msg.payload.username+\"','\"+msg.payload.password+\"')\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 250,
         "y": 380,
         "wires": [
             [
-                "f5831746.ba4a7"
+                "282ecc02.d70aa4"
             ]
         ]
     },
     {
-        "id": "f5831746.ba4a7",
+        "id": "282ecc02.d70aa4",
         "type": "mysql",
-        "z": "bdff3fd8.bc0d4",
-        "mydb": "cee63ff4.fc65e8",
+        "z": "f1d5e28c.51cc3",
+        "mydb": "3379ef25.fa932",
         "name": "WA",
         "x": 400,
         "y": 380,
         "wires": [
             [
-                "26b41db8.0e74fa"
+                "590a3a7f.343e74"
             ]
         ]
     },
     {
-        "id": "26b41db8.0e74fa",
-        "type": "template",
-        "z": "bdff3fd8.bc0d4",
-        "name": "",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "This is the payload: {{payload}} !",
-        "output": "str",
-        "x": 560,
-        "y": 360,
-        "wires": [
-            [
-                "fd2ab185.e346f8"
-            ]
-        ]
-    },
-    {
-        "id": "fd2ab185.e346f8",
-        "type": "link out",
-        "z": "bdff3fd8.bc0d4",
-        "name": "Out Format",
-        "links": [
-            "c05b11b1.2fd4f8"
-        ],
-        "x": 695,
-        "y": 360,
-        "wires": []
-    },
-    {
-        "id": "3be39fda.69a3e",
+        "id": "987adfdd.4b001",
         "type": "http in",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f1d5e28c.51cc3",
         "name": "DeleteUser",
         "url": "/deleteUser",
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 100,
-        "y": 760,
+        "x": 80,
+        "y": 940,
         "wires": [
             [
-                "c53898ac.06b4f8"
+                "87b17030.52918"
             ]
         ]
     },
     {
-        "id": "c53898ac.06b4f8",
+        "id": "87b17030.52918",
         "type": "function",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f1d5e28c.51cc3",
         "name": "Delete User",
         "func": "msg.topic = \"delete from user where username = '\"+msg.payload.user+\"'\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 270,
-        "y": 760,
+        "x": 250,
+        "y": 940,
         "wires": [
             [
-                "79663101.6c8a1"
+                "753a1916.959e28"
             ]
         ]
     },
     {
-        "id": "79663101.6c8a1",
+        "id": "753a1916.959e28",
         "type": "mysql",
-        "z": "bdff3fd8.bc0d4",
-        "mydb": "cee63ff4.fc65e8",
+        "z": "f1d5e28c.51cc3",
+        "mydb": "3379ef25.fa932",
         "name": "WA",
-        "x": 420,
-        "y": 760,
+        "x": 400,
+        "y": 940,
         "wires": [
             [
-                "5b487ae2.c479dc"
+                "a9f035f8.487108"
             ]
         ]
     },
     {
-        "id": "5b487ae2.c479dc",
-        "type": "template",
-        "z": "bdff3fd8.bc0d4",
-        "name": "",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "This is the payload: {{payload}} !",
-        "output": "str",
-        "x": 580,
-        "y": 740,
-        "wires": [
-            [
-                "6193a63f.a5b0d8"
-            ]
-        ]
-    },
-    {
-        "id": "6193a63f.a5b0d8",
-        "type": "link out",
-        "z": "bdff3fd8.bc0d4",
-        "name": "Out Format",
-        "links": [
-            "c05b11b1.2fd4f8"
-        ],
-        "x": 715,
-        "y": 740,
-        "wires": []
-    },
-    {
-        "id": "558c6d8d.cb35cc",
+        "id": "a1c9d16d.396fd",
         "type": "http in",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f1d5e28c.51cc3",
         "name": "DeleteEmp",
-        "url": "/DeleteEmployee",
+        "url": "/DeleteEmployer",
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 100,
-        "y": 820,
+        "x": 80,
+        "y": 1000,
         "wires": [
             [
-                "13bbcc2e.83275c"
+                "4e36ec30.4dbf44"
             ]
         ]
     },
     {
-        "id": "13bbcc2e.83275c",
+        "id": "4e36ec30.4dbf44",
         "type": "function",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f1d5e28c.51cc3",
         "name": "Delete Employee",
         "func": "msg.topic = \"delete from employer where username = '\" + msg.payload.employer+\"'\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 290,
-        "y": 820,
+        "x": 270,
+        "y": 1000,
         "wires": [
             [
-                "17a2aa57.80b546"
+                "f6148e66.8fb21"
             ]
         ]
     },
     {
-        "id": "17a2aa57.80b546",
+        "id": "f6148e66.8fb21",
         "type": "mysql",
-        "z": "bdff3fd8.bc0d4",
-        "mydb": "cee63ff4.fc65e8",
+        "z": "f1d5e28c.51cc3",
+        "mydb": "3379ef25.fa932",
         "name": "WA",
-        "x": 450,
-        "y": 820,
+        "x": 430,
+        "y": 1000,
         "wires": [
             [
-                "1cb185f3.e0b6f2"
+                "a9f035f8.487108"
             ]
         ]
     },
     {
-        "id": "1cb185f3.e0b6f2",
-        "type": "template",
-        "z": "bdff3fd8.bc0d4",
-        "name": "",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "This is the payload: {{payload}} !",
-        "output": "str",
-        "x": 610,
-        "y": 800,
-        "wires": [
-            [
-                "21a38900.3bf018"
-            ]
-        ]
-    },
-    {
-        "id": "21a38900.3bf018",
+        "id": "a9f035f8.487108",
         "type": "link out",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f1d5e28c.51cc3",
         "name": "Out Format",
         "links": [
-            "c05b11b1.2fd4f8"
+            "2ed4261a.c0b28a"
         ],
-        "x": 755,
-        "y": 800,
+        "x": 595,
+        "y": 960,
         "wires": []
     },
     {
-        "id": "30c36ae8.25c836",
+        "id": "b44c1203.2ff9c",
         "type": "http in",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f1d5e28c.51cc3",
         "name": "LoginEmp",
         "url": "/loginEmp",
         "method": "post",
@@ -666,47 +476,28 @@
         "y": 200,
         "wires": [
             [
-                "8455b483.5977d"
+                "5740de17.2d876"
             ]
         ]
     },
     {
-        "id": "eb256a8a.467a48",
-        "type": "template",
-        "z": "bdff3fd8.bc0d4",
-        "name": "Format - Fehler",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "This is the payload: {{payload}} !",
-        "output": "str",
-        "x": 860,
-        "y": 140,
-        "wires": [
-            [
-                "a435fbb7.4c747"
-            ]
-        ]
-    },
-    {
-        "id": "2d20e368.60ba24",
+        "id": "58f32ca3.0a67d4",
         "type": "mysql",
-        "z": "bdff3fd8.bc0d4",
-        "mydb": "cee63ff4.fc65e8",
+        "z": "f1d5e28c.51cc3",
+        "mydb": "3379ef25.fa932",
         "name": "WA",
         "x": 370,
         "y": 200,
         "wires": [
             [
-                "e8faf214.7a0618"
+                "90e1f0d9.fade4"
             ]
         ]
     },
     {
-        "id": "8455b483.5977d",
+        "id": "5740de17.2d876",
         "type": "function",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f1d5e28c.51cc3",
         "name": "Get ID/PW",
         "func": "msg.password = msg.payload.password;\nmsg.topic = \"select * from employer where username = '\"+msg.payload.emp+\"'\";\n\nreturn msg;",
         "outputs": 1,
@@ -715,33 +506,309 @@
         "y": 200,
         "wires": [
             [
-                "2d20e368.60ba24"
+                "58f32ca3.0a67d4"
             ]
         ]
     },
     {
-        "id": "abc5caaa.c0183",
-        "type": "template",
-        "z": "bdff3fd8.bc0d4",
-        "name": "Format",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "This is the payload: {{payload}} !",
-        "output": "str",
-        "x": 860,
-        "y": 220,
+        "id": "c50b674f.72ddf8",
+        "type": "link out",
+        "z": "f1d5e28c.51cc3",
+        "name": "Out Format",
+        "links": [
+            "2ed4261a.c0b28a"
+        ],
+        "x": 1035,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "a25d32ae.aa414",
+        "type": "http in",
+        "z": "f1d5e28c.51cc3",
+        "name": "AddSkill",
+        "url": "/AddSkill",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 100,
+        "y": 1080,
         "wires": [
             [
-                "a435fbb7.4c747"
+                "3f4e8b36.646234"
             ]
         ]
     },
     {
-        "id": "e8faf214.7a0618",
+        "id": "3f4e8b36.646234",
         "type": "function",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f1d5e28c.51cc3",
+        "name": "Add Skill",
+        "func": "msg.topic = \"insert into user_has_skill (user_user_id,skill_skill_id,level) values ('\"+msg.payload.user_id+\"','\"+msg.payload.skill_id+\"','\"+msg.payload.level+\"')\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 250,
+        "y": 1080,
+        "wires": [
+            [
+                "bf391ebe.f1ab7"
+            ]
+        ]
+    },
+    {
+        "id": "bf391ebe.f1ab7",
+        "type": "mysql",
+        "z": "f1d5e28c.51cc3",
+        "mydb": "3379ef25.fa932",
+        "name": "WA",
+        "x": 420,
+        "y": 1080,
+        "wires": [
+            [
+                "4d3d636b.720dbc"
+            ]
+        ]
+    },
+    {
+        "id": "4d3d636b.720dbc",
+        "type": "link out",
+        "z": "f1d5e28c.51cc3",
+        "name": "Out Format",
+        "links": [
+            "2ed4261a.c0b28a"
+        ],
+        "x": 525,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "6b7a0f39.ce8e4",
+        "type": "http in",
+        "z": "f1d5e28c.51cc3",
+        "name": "GetSkill",
+        "url": "/GetSkill",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 100,
+        "y": 1220,
+        "wires": [
+            [
+                "bd1b28dd.a79888"
+            ]
+        ]
+    },
+    {
+        "id": "b463c4d9.a3e628",
+        "type": "mysql",
+        "z": "f1d5e28c.51cc3",
+        "mydb": "3379ef25.fa932",
+        "name": "WA",
+        "x": 370,
+        "y": 1220,
+        "wires": [
+            [
+                "90005513.f0cfe8"
+            ]
+        ]
+    },
+    {
+        "id": "bd1b28dd.a79888",
+        "type": "function",
+        "z": "f1d5e28c.51cc3",
+        "name": "Get Skills",
+        "func": "msg.topic = \"select * from skills\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 240,
+        "y": 1220,
+        "wires": [
+            [
+                "b463c4d9.a3e628"
+            ]
+        ]
+    },
+    {
+        "id": "90005513.f0cfe8",
+        "type": "link out",
+        "z": "f1d5e28c.51cc3",
+        "name": "Out Format",
+        "links": [
+            "2ed4261a.c0b28a"
+        ],
+        "x": 495,
+        "y": 1220,
+        "wires": []
+    },
+    {
+        "id": "f3132c43.682f9",
+        "type": "http in",
+        "z": "f1d5e28c.51cc3",
+        "name": "EmployerSkill",
+        "url": "/AddEmpSkill",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 80,
+        "y": 1120,
+        "wires": [
+            [
+                "2abac60e.55558a"
+            ]
+        ]
+    },
+    {
+        "id": "2abac60e.55558a",
+        "type": "function",
+        "z": "f1d5e28c.51cc3",
+        "name": "Add Skill",
+        "func": "msg.topic = \"insert into employer_needs_skill (employer_employer_id,skill_skill_id) values ('\"+msg.payload.employer_id+\"','\"+msg.payload.skill_id+\"')\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 230,
+        "y": 1120,
+        "wires": [
+            [
+                "bf69d2f4.47fcd"
+            ]
+        ]
+    },
+    {
+        "id": "bf69d2f4.47fcd",
+        "type": "mysql",
+        "z": "f1d5e28c.51cc3",
+        "mydb": "3379ef25.fa932",
+        "name": "WA",
+        "x": 380,
+        "y": 1120,
+        "wires": [
+            [
+                "731c6740.cb2688"
+            ]
+        ]
+    },
+    {
+        "id": "731c6740.cb2688",
+        "type": "link out",
+        "z": "f1d5e28c.51cc3",
+        "name": "Out Format",
+        "links": [
+            "2ed4261a.c0b28a"
+        ],
+        "x": 485,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "ee1fdc8b.586d",
+        "type": "http in",
+        "z": "f1d5e28c.51cc3",
+        "name": "UpdateEmployer",
+        "url": "/setDataEmp",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 100,
+        "y": 580,
+        "wires": [
+            [
+                "63acc09d.90f06"
+            ]
+        ]
+    },
+    {
+        "id": "42c0a789.d04988",
+        "type": "http in",
+        "z": "f1d5e28c.51cc3",
+        "name": "UpdateUser",
+        "url": "/setDataUser",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 100,
+        "y": 500,
+        "wires": [
+            [
+                "d0dc5d05.f9253"
+            ]
+        ]
+    },
+    {
+        "id": "d0dc5d05.f9253",
+        "type": "function",
+        "z": "f1d5e28c.51cc3",
+        "name": "",
+        "func": "msg.topic = \"update user set lastname = '\"+msg.payload.lastname+\"', forename = '\"+msg.payload.forename+\"', description = '\"+msg.payload.descr+\"', userpicture = '\"+msg.payload.userpicture+\"', salt = '\"+msg.payload.salt+ \"' where username = '\"+msg.payload.username+\"'\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 270,
+        "y": 500,
+        "wires": [
+            [
+                "f67612b2.7eb9c"
+            ]
+        ]
+    },
+    {
+        "id": "63acc09d.90f06",
+        "type": "function",
+        "z": "f1d5e28c.51cc3",
+        "name": "",
+        "func": "msg.topic = \"update employer set name = '\"+msg.payload.name+\"', employerpicture = '\"+msg.payload.employerpicture+\"', description = '\"+msg.payload.descr+\"', salt = '\"+msg.payload.salt+\"' where username = '\"+msg.payload.employername+\"'\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 270,
+        "y": 580,
+        "wires": [
+            [
+                "466e3c69.6753b4"
+            ]
+        ]
+    },
+    {
+        "id": "f67612b2.7eb9c",
+        "type": "mysql",
+        "z": "f1d5e28c.51cc3",
+        "mydb": "3379ef25.fa932",
+        "name": "WA",
+        "x": 430,
+        "y": 500,
+        "wires": [
+            [
+                "b50aa741.c9acd8"
+            ]
+        ]
+    },
+    {
+        "id": "466e3c69.6753b4",
+        "type": "mysql",
+        "z": "f1d5e28c.51cc3",
+        "mydb": "3379ef25.fa932",
+        "name": "WA",
+        "x": 430,
+        "y": 580,
+        "wires": [
+            [
+                "b50aa741.c9acd8"
+            ]
+        ]
+    },
+    {
+        "id": "b50aa741.c9acd8",
+        "type": "link out",
+        "z": "f1d5e28c.51cc3",
+        "name": "Out Format",
+        "links": [
+            "2ed4261a.c0b28a"
+        ],
+        "x": 555,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "90e1f0d9.fade4",
+        "type": "function",
+        "z": "f1d5e28c.51cc3",
         "name": "Compare Data",
         "func": "if(msg.payload.password == msg.password){\n    msg.compare = 1;\n}else{\n    msg.compare = 2;\n}\nreturn msg;",
         "outputs": 1,
@@ -750,14 +817,68 @@
         "y": 200,
         "wires": [
             [
-                "77f2c440.27cf0c"
+                "fbef2e31.6cba7"
             ]
         ]
     },
     {
-        "id": "77f2c440.27cf0c",
+        "id": "3eeb6e89.ec4612",
+        "type": "template",
+        "z": "f1d5e28c.51cc3",
+        "name": "Format",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n\"login\": 1\n}",
+        "output": "str",
+        "x": 860,
+        "y": 220,
+        "wires": [
+            [
+                "c50b674f.72ddf8"
+            ]
+        ]
+    },
+    {
+        "id": "aafe8075.b734b",
+        "type": "template",
+        "z": "f1d5e28c.51cc3",
+        "name": "Format - Fehler",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n\"login\": 0\n}",
+        "output": "str",
+        "x": 860,
+        "y": 140,
+        "wires": [
+            [
+                "c50b674f.72ddf8"
+            ]
+        ]
+    },
+    {
+        "id": "537d52dc.03490c",
+        "type": "function",
+        "z": "f1d5e28c.51cc3",
+        "name": "Compare Data",
+        "func": "if(msg.payload.password == msg.password){\n    msg.compare = 1;\n}else{\n    msg.compare = 2;\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 540,
+        "y": 80,
+        "wires": [
+            [
+                "efcf12d9.8458c"
+            ]
+        ]
+    },
+    {
+        "id": "efcf12d9.8458c",
         "type": "switch",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f1d5e28c.51cc3",
         "name": "",
         "property": "compare",
         "propertyType": "msg",
@@ -777,207 +898,37 @@
         "repair": false,
         "outputs": 2,
         "x": 690,
-        "y": 200,
+        "y": 80,
         "wires": [
             [
-                "eb256a8a.467a48"
+                "3816248b.919a1c"
             ],
             [
-                "abc5caaa.c0183"
+                "8900b7a0.c9be08"
             ]
         ]
     },
     {
-        "id": "a435fbb7.4c747",
-        "type": "link out",
-        "z": "bdff3fd8.bc0d4",
-        "name": "Out Format",
-        "links": [
-            "c05b11b1.2fd4f8"
-        ],
-        "x": 1035,
-        "y": 180,
-        "wires": []
-    },
-    {
-        "id": "9ad1c081.4a44c8",
-        "type": "http in",
-        "z": "bdff3fd8.bc0d4",
-        "name": "AddSkill",
-        "url": "/AddSkill",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 110,
-        "y": 940,
+        "id": "3816248b.919a1c",
+        "type": "template",
+        "z": "f1d5e28c.51cc3",
+        "name": "Format - Fehler",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n\"login\": 1\n}",
+        "output": "str",
+        "x": 860,
+        "y": 20,
         "wires": [
             [
-                "5d3cd54f.a6049c"
+                "8900b7a0.c9be08"
             ]
         ]
     },
     {
-        "id": "5d3cd54f.a6049c",
-        "type": "function",
-        "z": "bdff3fd8.bc0d4",
-        "name": "Add Skill",
-        "func": "msg.topic = \"insert into user_has_skill (user_user_id,skill_skill_id,level) values ('\"+msg.payload.user_id+\"','\"+msg.payload.skill_id+\"','\"+msg.payload.level+\"')\";\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 260,
-        "y": 940,
-        "wires": [
-            [
-                "4dad9196.d6c758"
-            ]
-        ]
-    },
-    {
-        "id": "4dad9196.d6c758",
-        "type": "mysql",
-        "z": "bdff3fd8.bc0d4",
-        "mydb": "cee63ff4.fc65e8",
-        "name": "WA",
-        "x": 430,
-        "y": 940,
-        "wires": [
-            [
-                "8b74568a.be7e1"
-            ]
-        ]
-    },
-    {
-        "id": "8b74568a.be7e1",
-        "type": "link out",
-        "z": "bdff3fd8.bc0d4",
-        "name": "Out Format",
-        "links": [
-            "c05b11b1.2fd4f8"
-        ],
-        "x": 535,
-        "y": 940,
-        "wires": []
-    },
-    {
-        "id": "ca4bf0de.02fc6",
-        "type": "http in",
-        "z": "bdff3fd8.bc0d4",
-        "name": "GetSkill",
-        "url": "/GetSkill",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 110,
-        "y": 1080,
-        "wires": [
-            [
-                "8cf79308.3f007"
-            ]
-        ]
-    },
-    {
-        "id": "61fe95d1.c9aad4",
-        "type": "mysql",
-        "z": "bdff3fd8.bc0d4",
-        "mydb": "cee63ff4.fc65e8",
-        "name": "WA",
-        "x": 380,
-        "y": 1080,
-        "wires": [
-            [
-                "1f104b1.b6df035"
-            ]
-        ]
-    },
-    {
-        "id": "8cf79308.3f007",
-        "type": "function",
-        "z": "bdff3fd8.bc0d4",
-        "name": "Get Skills",
-        "func": "msg.topic = \"select * from skills\";\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 250,
-        "y": 1080,
-        "wires": [
-            [
-                "61fe95d1.c9aad4"
-            ]
-        ]
-    },
-    {
-        "id": "1f104b1.b6df035",
-        "type": "link out",
-        "z": "bdff3fd8.bc0d4",
-        "name": "Out Format",
-        "links": [
-            "c05b11b1.2fd4f8"
-        ],
-        "x": 505,
-        "y": 1080,
-        "wires": []
-    },
-    {
-        "id": "863268bf.ea851",
-        "type": "http in",
-        "z": "bdff3fd8.bc0d4",
-        "name": "EmployerSkill",
-        "url": "/AddEmpSkill",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 90,
-        "y": 980,
-        "wires": [
-            [
-                "512529d4.a2f308"
-            ]
-        ]
-    },
-    {
-        "id": "512529d4.a2f308",
-        "type": "function",
-        "z": "bdff3fd8.bc0d4",
-        "name": "Add Skill",
-        "func": "msg.topic = \"insert into employer_needs_skill (employer_employer_id,skill_skill_id) values ('\"+msg.payload.employer_id+\"','\"+msg.payload.skill_id+\"')\";\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 240,
-        "y": 980,
-        "wires": [
-            [
-                "3e06d114.7ab8c6"
-            ]
-        ]
-    },
-    {
-        "id": "3e06d114.7ab8c6",
-        "type": "mysql",
-        "z": "bdff3fd8.bc0d4",
-        "mydb": "cee63ff4.fc65e8",
-        "name": "WA",
-        "x": 390,
-        "y": 980,
-        "wires": [
-            [
-                "2fc1fe86.00f75a"
-            ]
-        ]
-    },
-    {
-        "id": "2fc1fe86.00f75a",
-        "type": "link out",
-        "z": "bdff3fd8.bc0d4",
-        "name": "Out Format",
-        "links": [
-            "c05b11b1.2fd4f8"
-        ],
-        "x": 495,
-        "y": 980,
-        "wires": []
-    },
-    {
-        "id": "cee63ff4.fc65e8",
+        "id": "3379ef25.fa932",
         "type": "MySQLdatabase",
         "z": "",
         "host": "127.0.0.1",
