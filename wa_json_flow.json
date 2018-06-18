@@ -7,140 +7,6 @@
         "info": ""
     },
     {
-        "id": "da6bada7.a793e8",
-        "type": "http in",
-        "z": "bdff3fd8.bc0d4",
-        "name": "LoginUser",
-        "url": "/loginUser",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 80,
-        "y": 80,
-        "wires": [
-            [
-                "fc212caf.5069a"
-            ]
-        ]
-    },
-    {
-        "id": "8b8a7b34.f5c22",
-        "type": "template",
-        "z": "bdff3fd8.bc0d4",
-        "name": "Format - Fehler",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "{\n\"login\": 1\n}",
-        "output": "str",
-        "x": 860,
-        "y": 20,
-        "wires": [
-            [
-                "41b503ba.4f796c"
-            ]
-        ]
-    },
-    {
-        "id": "ded95f1c.4364f8",
-        "type": "mysql",
-        "z": "bdff3fd8.bc0d4",
-        "mydb": "cee63ff4.fc65e8",
-        "name": "WA",
-        "x": 370,
-        "y": 80,
-        "wires": [
-            [
-                "3e7fea4.53cb696"
-            ]
-        ]
-    },
-    {
-        "id": "fc212caf.5069a",
-        "type": "function",
-        "z": "bdff3fd8.bc0d4",
-        "name": "Get ID/PW",
-        "func": "msg.password = msg.payload.password;\nmsg.topic = \"select * from user where username = '\" + msg.payload.user+\"'\";\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 230,
-        "y": 80,
-        "wires": [
-            [
-                "ded95f1c.4364f8"
-            ]
-        ]
-    },
-    {
-        "id": "a7267094.130a1",
-        "type": "template",
-        "z": "bdff3fd8.bc0d4",
-        "name": "Format",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "{\n\"login\":1\n}",
-        "output": "str",
-        "x": 860,
-        "y": 100,
-        "wires": [
-            [
-                "41b503ba.4f796c"
-            ]
-        ]
-    },
-    {
-        "id": "3e7fea4.53cb696",
-        "type": "function",
-        "z": "bdff3fd8.bc0d4",
-        "name": "Compare Data",
-        "func": "if(msg.payload.password == msg.password){\n    msg.compare = 1;\n}else{\n    msg.compare = 2;\n}\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 540,
-        "y": 80,
-        "wires": [
-            [
-                "de0c50de.2c051"
-            ]
-        ]
-    },
-    {
-        "id": "de0c50de.2c051",
-        "type": "switch",
-        "z": "bdff3fd8.bc0d4",
-        "name": "",
-        "property": "compare",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "1",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "2",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 690,
-        "y": 80,
-        "wires": [
-            [
-                "8b8a7b34.f5c22"
-            ],
-            [
-                "a7267094.130a1"
-            ]
-        ]
-    },
-    {
         "id": "dd9cbb7c.82c2c",
         "type": "http in",
         "z": "bdff3fd8.bc0d4",
@@ -149,8 +15,8 @@
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 80,
-        "y": 320,
+        "x": 100,
+        "y": 360,
         "wires": [
             [
                 "8a535f6f.3f23d"
@@ -165,8 +31,8 @@
         "func": "//msg.topic = \"insert into user (lastname, forename, description, username, password, salt , userpicture) values ('\"+msg.payload.lastname+\"','\"+msg.payload.forename+\"','\"+msg.payload.description+\"','\"+msg.payload.username+\"','\"+msg.payload.password+\"','\"+msg.payload.salt+\"','\"+msg.payload.userpicture+\"')\";\nmsg.topic = \"insert into user (username, password) values ('\"+msg.payload.username+\"','\"+msg.payload.password+\"')\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 250,
-        "y": 320,
+        "x": 270,
+        "y": 360,
         "wires": [
             [
                 "95201721.908eb"
@@ -179,8 +45,8 @@
         "z": "bdff3fd8.bc0d4",
         "mydb": "cee63ff4.fc65e8",
         "name": "WA",
-        "x": 400,
-        "y": 320,
+        "x": 420,
+        "y": 360,
         "wires": [
             [
                 "c9062c56.2deac8"
@@ -310,7 +176,8 @@
             "1f104b1.b6df035",
             "2fc1fe86.00f75a",
             "6c8d9306.13961c",
-            "b6dd63c3.2cfae"
+            "b6dd63c3.2cfae",
+            "e23cc4ec.a2f0d"
         ],
         "x": 995,
         "y": 280,
@@ -348,18 +215,6 @@
         ]
     },
     {
-        "id": "41b503ba.4f796c",
-        "type": "link out",
-        "z": "bdff3fd8.bc0d4",
-        "name": "Out Format",
-        "links": [
-            "c05b11b1.2fd4f8"
-        ],
-        "x": 1035,
-        "y": 60,
-        "wires": []
-    },
-    {
         "id": "c9062c56.2deac8",
         "type": "link out",
         "z": "bdff3fd8.bc0d4",
@@ -367,8 +222,8 @@
         "links": [
             "c05b11b1.2fd4f8"
         ],
-        "x": 535,
-        "y": 340,
+        "x": 555,
+        "y": 380,
         "wires": []
     },
     {
@@ -380,8 +235,8 @@
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 80,
-        "y": 380,
+        "x": 100,
+        "y": 420,
         "wires": [
             [
                 "19e4309a.ffc097"
@@ -396,8 +251,8 @@
         "func": "//msg.topic = \"insert into employer (name,username,password,salt,employerpicture,description) values ('\"+msg.payload.name+\"','\"+msg.payload.username+\"','\"+msg.payload.password+\"','\"+msg.payload.salt+\"','\"+msg.payload.employerpicture+\"','\"+msg.payload.description+\"')\";\nmsg.topic = \"insert into employer (username, password) values ('\"+msg.payload.username+\"','\"+msg.payload.password+\"')\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 250,
-        "y": 380,
+        "x": 270,
+        "y": 420,
         "wires": [
             [
                 "f5831746.ba4a7"
@@ -410,8 +265,8 @@
         "z": "bdff3fd8.bc0d4",
         "mydb": "cee63ff4.fc65e8",
         "name": "WA",
-        "x": 400,
-        "y": 380,
+        "x": 420,
+        "y": 420,
         "wires": [
             [
                 "c9062c56.2deac8"
@@ -522,114 +377,6 @@
         ],
         "x": 595,
         "y": 960,
-        "wires": []
-    },
-    {
-        "id": "30c36ae8.25c836",
-        "type": "http in",
-        "z": "bdff3fd8.bc0d4",
-        "name": "LoginEmp",
-        "url": "/loginEmp",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 80,
-        "y": 200,
-        "wires": [
-            [
-                "8455b483.5977d"
-            ]
-        ]
-    },
-    {
-        "id": "2d20e368.60ba24",
-        "type": "mysql",
-        "z": "bdff3fd8.bc0d4",
-        "mydb": "cee63ff4.fc65e8",
-        "name": "WA",
-        "x": 370,
-        "y": 200,
-        "wires": [
-            [
-                "e8faf214.7a0618"
-            ]
-        ]
-    },
-    {
-        "id": "8455b483.5977d",
-        "type": "function",
-        "z": "bdff3fd8.bc0d4",
-        "name": "Get ID/PW",
-        "func": "msg.password = msg.payload.password;\nmsg.topic = \"select * from employer where username = '\"+msg.payload.emp+\"'\";\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 230,
-        "y": 200,
-        "wires": [
-            [
-                "2d20e368.60ba24"
-            ]
-        ]
-    },
-    {
-        "id": "e8faf214.7a0618",
-        "type": "function",
-        "z": "bdff3fd8.bc0d4",
-        "name": "Compare Data",
-        "func": "if(msg.payload.password == msg.password){\n    msg.compare = 1;\n}else{\n    msg.compare = 2;\n}\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 540,
-        "y": 200,
-        "wires": [
-            [
-                "77f2c440.27cf0c"
-            ]
-        ]
-    },
-    {
-        "id": "77f2c440.27cf0c",
-        "type": "switch",
-        "z": "bdff3fd8.bc0d4",
-        "name": "",
-        "property": "compare",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "1",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "2",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 690,
-        "y": 200,
-        "wires": [
-            [
-                "eb256a8a.467a48"
-            ],
-            [
-                "abc5caaa.c0183"
-            ]
-        ]
-    },
-    {
-        "id": "a435fbb7.4c747",
-        "type": "link out",
-        "z": "bdff3fd8.bc0d4",
-        "name": "Out Format",
-        "links": [
-            "c05b11b1.2fd4f8"
-        ],
-        "x": 1035,
-        "y": 180,
         "wires": []
     },
     {
@@ -916,42 +663,63 @@
         "wires": []
     },
     {
-        "id": "eb256a8a.467a48",
-        "type": "template",
+        "id": "3d79a745.524558",
+        "type": "http in",
         "z": "bdff3fd8.bc0d4",
-        "name": "Format - Fehler",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "{\n\"login\": 0\n}",
-        "output": "str",
-        "x": 860,
-        "y": 140,
+        "name": "Login",
+        "url": "/login",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 70,
+        "y": 280,
         "wires": [
             [
-                "a435fbb7.4c747"
+                "81b6c971.e6f3f"
             ]
         ]
     },
     {
-        "id": "abc5caaa.c0183",
-        "type": "template",
+        "id": "81b6c971.e6f3f",
+        "type": "function",
         "z": "bdff3fd8.bc0d4",
-        "name": "Format",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "{\n\"login\": 1\n}",
-        "output": "str",
-        "x": 860,
-        "y": 220,
+        "name": "Select user",
+        "func": "msg.topic = \"select * from employer e, user u where u.username = '\"+ msg.payload.username + \"' or e.username = '\" + msg.payload.username + \"'\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 230,
+        "y": 280,
         "wires": [
             [
-                "a435fbb7.4c747"
+                "c1778197.728728"
             ]
         ]
+    },
+    {
+        "id": "c1778197.728728",
+        "type": "mysql",
+        "z": "bdff3fd8.bc0d4",
+        "mydb": "cee63ff4.fc65e8",
+        "name": "WA",
+        "x": 370,
+        "y": 280,
+        "wires": [
+            [
+                "e23cc4ec.a2f0d"
+            ]
+        ]
+    },
+    {
+        "id": "e23cc4ec.a2f0d",
+        "type": "link out",
+        "z": "bdff3fd8.bc0d4",
+        "name": "Out Format",
+        "links": [
+            "c05b11b1.2fd4f8"
+        ],
+        "x": 475,
+        "y": 280,
+        "wires": []
     },
     {
         "id": "cee63ff4.fc65e8",
