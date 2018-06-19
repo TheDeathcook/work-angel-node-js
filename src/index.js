@@ -31,11 +31,7 @@ app.use(settings.httpAdminRoot,RED.httpAdmin);
 // Serve the http nodes UI from /api
 app.use(settings.httpNodeRoot,RED.httpNode);
 
-server.listen(8000);
+server.listen(8000, "192.168.178.78");
 
 // Start the runtime
 RED.start();
-
-var globalFlow = RED.nodes.getFlow("global");
-globalFlow.configs.push(flow);
-RED.nodes.updateFlow("global", globalFlow);
