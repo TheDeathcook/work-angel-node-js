@@ -3,7 +3,6 @@
 const http = require('http');
 const express = require("express");
 const RED = require("node-red");
-const flow = require("../workangel_node")
 
 // Create an Express app
 const app = express();
