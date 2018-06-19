@@ -7,140 +7,6 @@
         "info": ""
     },
     {
-        "id": "da6bada7.a793e8",
-        "type": "http in",
-        "z": "bdff3fd8.bc0d4",
-        "name": "LoginUser",
-        "url": "/loginUser",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 80,
-        "y": 80,
-        "wires": [
-            [
-                "fc212caf.5069a"
-            ]
-        ]
-    },
-    {
-        "id": "8b8a7b34.f5c22",
-        "type": "template",
-        "z": "bdff3fd8.bc0d4",
-        "name": "Format - Fehler",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "{\n\"login\": 1\n}",
-        "output": "str",
-        "x": 860,
-        "y": 20,
-        "wires": [
-            [
-                "41b503ba.4f796c"
-            ]
-        ]
-    },
-    {
-        "id": "ded95f1c.4364f8",
-        "type": "mysql",
-        "z": "bdff3fd8.bc0d4",
-        "mydb": "cee63ff4.fc65e8",
-        "name": "WA",
-        "x": 370,
-        "y": 80,
-        "wires": [
-            [
-                "3e7fea4.53cb696"
-            ]
-        ]
-    },
-    {
-        "id": "fc212caf.5069a",
-        "type": "function",
-        "z": "bdff3fd8.bc0d4",
-        "name": "Get ID/PW",
-        "func": "msg.password = msg.payload.password;\nmsg.topic = \"select * from user where username = '\" + msg.payload.user+\"'\";\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 230,
-        "y": 80,
-        "wires": [
-            [
-                "ded95f1c.4364f8"
-            ]
-        ]
-    },
-    {
-        "id": "a7267094.130a1",
-        "type": "template",
-        "z": "bdff3fd8.bc0d4",
-        "name": "Format",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "{\n\"login\":1\n}",
-        "output": "str",
-        "x": 860,
-        "y": 100,
-        "wires": [
-            [
-                "41b503ba.4f796c"
-            ]
-        ]
-    },
-    {
-        "id": "3e7fea4.53cb696",
-        "type": "function",
-        "z": "bdff3fd8.bc0d4",
-        "name": "Compare Data",
-        "func": "if(msg.payload.password == msg.password){\n    msg.compare = 1;\n}else{\n    msg.compare = 2;\n}\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 540,
-        "y": 80,
-        "wires": [
-            [
-                "de0c50de.2c051"
-            ]
-        ]
-    },
-    {
-        "id": "de0c50de.2c051",
-        "type": "switch",
-        "z": "bdff3fd8.bc0d4",
-        "name": "",
-        "property": "compare",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "1",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "2",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 690,
-        "y": 80,
-        "wires": [
-            [
-                "8b8a7b34.f5c22"
-            ],
-            [
-                "a7267094.130a1"
-            ]
-        ]
-    },
-    {
         "id": "dd9cbb7c.82c2c",
         "type": "http in",
         "z": "bdff3fd8.bc0d4",
@@ -196,8 +62,8 @@
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 100,
-        "y": 740,
+        "x": 80,
+        "y": 700,
         "wires": [
             [
                 "22a6cd05.476ed2"
@@ -212,8 +78,8 @@
         "func": "msg.topic = \"insert into matches (employer_employer_id,user_user_id,compability,user_accepted,employer_accepted) values('\"+msg.payload.employer_id+\"','\"+msg.payload.user_id+\"','\"+msg.payload.compability+\"','\"+msg.payload.user_accepted+\"','\"+msg.payload.employer_accepted+\"')\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 280,
-        "y": 740,
+        "x": 260,
+        "y": 700,
         "wires": [
             [
                 "5aada1c4.6068a"
@@ -226,8 +92,8 @@
         "z": "bdff3fd8.bc0d4",
         "mydb": "cee63ff4.fc65e8",
         "name": "WA",
-        "x": 450,
-        "y": 740,
+        "x": 430,
+        "y": 700,
         "wires": [
             [
                 "a048bf8b.9e9038"
@@ -243,8 +109,8 @@
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 110,
-        "y": 840,
+        "x": 90,
+        "y": 760,
         "wires": [
             [
                 "2607eabf.5d0e66"
@@ -259,8 +125,8 @@
         "func": "msg.topic = \"select * from matches where user_accepted = 'Y' and employer_accepted = 'Y'\"\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 300,
-        "y": 840,
+        "x": 280,
+        "y": 760,
         "wires": [
             [
                 "696c8023.306798"
@@ -273,8 +139,8 @@
         "z": "bdff3fd8.bc0d4",
         "mydb": "cee63ff4.fc65e8",
         "name": "WA",
-        "x": 450,
-        "y": 840,
+        "x": 430,
+        "y": 760,
         "wires": [
             [
                 "a048bf8b.9e9038"
@@ -289,8 +155,8 @@
         "links": [
             "c05b11b1.2fd4f8"
         ],
-        "x": 575,
-        "y": 800,
+        "x": 555,
+        "y": 740,
         "wires": []
     },
     {
@@ -310,7 +176,12 @@
             "1f104b1.b6df035",
             "2fc1fe86.00f75a",
             "6c8d9306.13961c",
-            "b6dd63c3.2cfae"
+            "b6dd63c3.2cfae",
+            "e23cc4ec.a2f0d",
+            "4d908666.ebd6",
+            "56475606.a50458",
+            "6d7b38c9.8b8e3",
+            "6ed46430.56297c"
         ],
         "x": 995,
         "y": 280,
@@ -346,18 +217,6 @@
                 "f877fc3b.610bc8"
             ]
         ]
-    },
-    {
-        "id": "41b503ba.4f796c",
-        "type": "link out",
-        "z": "bdff3fd8.bc0d4",
-        "name": "Out Format",
-        "links": [
-            "c05b11b1.2fd4f8"
-        ],
-        "x": 1035,
-        "y": 60,
-        "wires": []
     },
     {
         "id": "c9062c56.2deac8",
@@ -428,7 +287,7 @@
         "upload": false,
         "swaggerDoc": "",
         "x": 80,
-        "y": 940,
+        "y": 900,
         "wires": [
             [
                 "c53898ac.06b4f8"
@@ -444,7 +303,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 250,
-        "y": 940,
+        "y": 900,
         "wires": [
             [
                 "79663101.6c8a1"
@@ -458,7 +317,7 @@
         "mydb": "cee63ff4.fc65e8",
         "name": "WA",
         "x": 400,
-        "y": 940,
+        "y": 900,
         "wires": [
             [
                 "21a38900.3bf018"
@@ -475,7 +334,7 @@
         "upload": false,
         "swaggerDoc": "",
         "x": 80,
-        "y": 1000,
+        "y": 960,
         "wires": [
             [
                 "13bbcc2e.83275c"
@@ -491,7 +350,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 270,
-        "y": 1000,
+        "y": 960,
         "wires": [
             [
                 "17a2aa57.80b546"
@@ -505,7 +364,7 @@
         "mydb": "cee63ff4.fc65e8",
         "name": "WA",
         "x": 430,
-        "y": 1000,
+        "y": 960,
         "wires": [
             [
                 "21a38900.3bf018"
@@ -520,116 +379,8 @@
         "links": [
             "c05b11b1.2fd4f8"
         ],
-        "x": 595,
-        "y": 960,
-        "wires": []
-    },
-    {
-        "id": "30c36ae8.25c836",
-        "type": "http in",
-        "z": "bdff3fd8.bc0d4",
-        "name": "LoginEmp",
-        "url": "/loginEmp",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 80,
-        "y": 200,
-        "wires": [
-            [
-                "8455b483.5977d"
-            ]
-        ]
-    },
-    {
-        "id": "2d20e368.60ba24",
-        "type": "mysql",
-        "z": "bdff3fd8.bc0d4",
-        "mydb": "cee63ff4.fc65e8",
-        "name": "WA",
-        "x": 370,
-        "y": 200,
-        "wires": [
-            [
-                "e8faf214.7a0618"
-            ]
-        ]
-    },
-    {
-        "id": "8455b483.5977d",
-        "type": "function",
-        "z": "bdff3fd8.bc0d4",
-        "name": "Get ID/PW",
-        "func": "msg.password = msg.payload.password;\nmsg.topic = \"select * from employer where username = '\"+msg.payload.emp+\"'\";\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 230,
-        "y": 200,
-        "wires": [
-            [
-                "2d20e368.60ba24"
-            ]
-        ]
-    },
-    {
-        "id": "e8faf214.7a0618",
-        "type": "function",
-        "z": "bdff3fd8.bc0d4",
-        "name": "Compare Data",
-        "func": "if(msg.payload.password == msg.password){\n    msg.compare = 1;\n}else{\n    msg.compare = 2;\n}\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 540,
-        "y": 200,
-        "wires": [
-            [
-                "77f2c440.27cf0c"
-            ]
-        ]
-    },
-    {
-        "id": "77f2c440.27cf0c",
-        "type": "switch",
-        "z": "bdff3fd8.bc0d4",
-        "name": "",
-        "property": "compare",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "1",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "2",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 690,
-        "y": 200,
-        "wires": [
-            [
-                "eb256a8a.467a48"
-            ],
-            [
-                "abc5caaa.c0183"
-            ]
-        ]
-    },
-    {
-        "id": "a435fbb7.4c747",
-        "type": "link out",
-        "z": "bdff3fd8.bc0d4",
-        "name": "Out Format",
-        "links": [
-            "c05b11b1.2fd4f8"
-        ],
-        "x": 1035,
-        "y": 180,
+        "x": 555,
+        "y": 900,
         "wires": []
     },
     {
@@ -641,7 +392,7 @@
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 100,
+        "x": 80,
         "y": 1080,
         "wires": [
             [
@@ -657,7 +408,7 @@
         "func": "msg.topic = \"insert into user_has_skill (user_user_id,skill_skill_id,level) values ('\"+msg.payload.user_id+\"','\"+msg.payload.skill_id+\"','\"+msg.payload.level+\"')\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 250,
+        "x": 230,
         "y": 1080,
         "wires": [
             [
@@ -671,7 +422,7 @@
         "z": "bdff3fd8.bc0d4",
         "mydb": "cee63ff4.fc65e8",
         "name": "WA",
-        "x": 420,
+        "x": 400,
         "y": 1080,
         "wires": [
             [
@@ -687,7 +438,7 @@
         "links": [
             "c05b11b1.2fd4f8"
         ],
-        "x": 525,
+        "x": 505,
         "y": 1080,
         "wires": []
     },
@@ -695,12 +446,12 @@
         "id": "ca4bf0de.02fc6",
         "type": "http in",
         "z": "bdff3fd8.bc0d4",
-        "name": "GetSkill",
-        "url": "/GetSkill",
+        "name": "GetEmpSkill",
+        "url": "/GetEmpSkill",
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 100,
+        "x": 90,
         "y": 1220,
         "wires": [
             [
@@ -727,7 +478,7 @@
         "type": "function",
         "z": "bdff3fd8.bc0d4",
         "name": "Get Skills",
-        "func": "msg.topic = \"select * from skills\";\nreturn msg;",
+        "func": "msg.topic = \"select * from employer_needs_skills es, skills s where es.employer_employer_id ='\"+msg.payload.emp+\"'\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 240,
@@ -746,7 +497,7 @@
         "links": [
             "c05b11b1.2fd4f8"
         ],
-        "x": 495,
+        "x": 465,
         "y": 1220,
         "wires": []
     },
@@ -759,7 +510,7 @@
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 80,
+        "x": 90,
         "y": 1120,
         "wires": [
             [
@@ -775,7 +526,7 @@
         "func": "msg.topic = \"insert into employer_needs_skill (employer_employer_id,skill_skill_id) values ('\"+msg.payload.employer_id+\"','\"+msg.payload.skill_id+\"')\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 230,
+        "x": 240,
         "y": 1120,
         "wires": [
             [
@@ -789,7 +540,7 @@
         "z": "bdff3fd8.bc0d4",
         "mydb": "cee63ff4.fc65e8",
         "name": "WA",
-        "x": 380,
+        "x": 390,
         "y": 1120,
         "wires": [
             [
@@ -805,7 +556,7 @@
         "links": [
             "c05b11b1.2fd4f8"
         ],
-        "x": 485,
+        "x": 495,
         "y": 1120,
         "wires": []
     },
@@ -916,42 +667,437 @@
         "wires": []
     },
     {
-        "id": "eb256a8a.467a48",
-        "type": "template",
+        "id": "3d79a745.524558",
+        "type": "http in",
         "z": "bdff3fd8.bc0d4",
-        "name": "Format - Fehler",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "{\n\"login\": 0\n}",
-        "output": "str",
-        "x": 860,
-        "y": 140,
+        "name": "Login",
+        "url": "/login",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 200,
         "wires": [
             [
-                "a435fbb7.4c747"
+                "81b6c971.e6f3f"
             ]
         ]
     },
     {
-        "id": "abc5caaa.c0183",
-        "type": "template",
+        "id": "81b6c971.e6f3f",
+        "type": "function",
         "z": "bdff3fd8.bc0d4",
-        "name": "Format",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "{\n\"login\": 1\n}",
-        "output": "str",
-        "x": 860,
-        "y": 220,
+        "name": "Select user",
+        "func": "msg.topic = \"select * from employer e, user u where u.username = '\"+ msg.payload.username + \"' or e.username = '\" + msg.payload.username + \"'\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 270,
+        "y": 200,
         "wires": [
             [
-                "a435fbb7.4c747"
+                "c1778197.728728"
             ]
         ]
+    },
+    {
+        "id": "c1778197.728728",
+        "type": "mysql",
+        "z": "bdff3fd8.bc0d4",
+        "mydb": "cee63ff4.fc65e8",
+        "name": "WA",
+        "x": 410,
+        "y": 200,
+        "wires": [
+            [
+                "e23cc4ec.a2f0d"
+            ]
+        ]
+    },
+    {
+        "id": "e23cc4ec.a2f0d",
+        "type": "link out",
+        "z": "bdff3fd8.bc0d4",
+        "name": "Out Format",
+        "links": [
+            "c05b11b1.2fd4f8"
+        ],
+        "x": 515,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "f409c487.6888f",
+        "type": "inject",
+        "z": "bdff3fd8.bc0d4",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "86400",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 130,
+        "y": 60,
+        "wires": [
+            [
+                "a110f14e.9a03e"
+            ]
+        ]
+    },
+    {
+        "id": "a110f14e.9a03e",
+        "type": "function",
+        "z": "bdff3fd8.bc0d4",
+        "name": "delete matches",
+        "func": "msg.topic = \"delete from matches where user_accepted is not true or employer_accepted is not true\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 340,
+        "y": 60,
+        "wires": [
+            [
+                "434db126.2ab6b8"
+            ]
+        ]
+    },
+    {
+        "id": "434db126.2ab6b8",
+        "type": "mysql",
+        "z": "bdff3fd8.bc0d4",
+        "mydb": "cee63ff4.fc65e8",
+        "name": "WA",
+        "x": 490,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3e7fbc62.d41f34",
+        "type": "comment",
+        "z": "bdff3fd8.bc0d4",
+        "name": "Loescht die matches nach 24h, wenn der user und employer nicht akpzeptiert hat",
+        "info": "",
+        "x": 320,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "9f885617.1334b8",
+        "type": "comment",
+        "z": "bdff3fd8.bc0d4",
+        "name": "Login fuer den User & Employer",
+        "info": "",
+        "x": 160,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "f6f71dd0.91be2",
+        "type": "comment",
+        "z": "bdff3fd8.bc0d4",
+        "name": "Registierung fuer den User & Employer",
+        "info": "",
+        "x": 170,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "f8f9f7ec.0f6c2",
+        "type": "comment",
+        "z": "bdff3fd8.bc0d4",
+        "name": "Update die Daten fuer den User, wenn der diese aendern moechte",
+        "info": "",
+        "x": 260,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "24d1bc40.99d7e4",
+        "type": "comment",
+        "z": "bdff3fd8.bc0d4",
+        "name": "Einfuegen/Holt sich die Matches",
+        "info": "",
+        "x": 150,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "937aabb1.5eea38",
+        "type": "comment",
+        "z": "bdff3fd8.bc0d4",
+        "name": "Zum loeschen der Daten vom User/Employer",
+        "info": "",
+        "x": 190,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "42f71c03.784c3c",
+        "type": "comment",
+        "z": "bdff3fd8.bc0d4",
+        "name": "Fuegt die ausgewaehlten Skill zu den User/Employer",
+        "info": "",
+        "x": 210,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "d1837fb1.2488d",
+        "type": "comment",
+        "z": "bdff3fd8.bc0d4",
+        "name": "Holt sich die Skills",
+        "info": "",
+        "x": 110,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "91de3da7.507848",
+        "type": "http in",
+        "z": "bdff3fd8.bc0d4",
+        "name": "GetEmp",
+        "url": "/getAllEmp",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 60,
+        "y": 1380,
+        "wires": [
+            [
+                "83e0bdfc.6f42a8"
+            ]
+        ]
+    },
+    {
+        "id": "58a63a90.2bad5c",
+        "type": "mysql",
+        "z": "bdff3fd8.bc0d4",
+        "mydb": "cee63ff4.fc65e8",
+        "name": "WA",
+        "x": 350,
+        "y": 1380,
+        "wires": [
+            [
+                "4d908666.ebd6"
+            ]
+        ]
+    },
+    {
+        "id": "83e0bdfc.6f42a8",
+        "type": "function",
+        "z": "bdff3fd8.bc0d4",
+        "name": "Get Skills",
+        "func": "msg.topic = \"select * from employer\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 200,
+        "y": 1380,
+        "wires": [
+            [
+                "58a63a90.2bad5c"
+            ]
+        ]
+    },
+    {
+        "id": "4d908666.ebd6",
+        "type": "link out",
+        "z": "bdff3fd8.bc0d4",
+        "name": "Out Format",
+        "links": [
+            "c05b11b1.2fd4f8"
+        ],
+        "x": 475,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "a5979aa4.7fd7d",
+        "type": "http in",
+        "z": "bdff3fd8.bc0d4",
+        "name": "GetUser",
+        "url": "/getAllUser",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 60,
+        "y": 1420,
+        "wires": [
+            [
+                "2823d1f2.a55d66"
+            ]
+        ]
+    },
+    {
+        "id": "9bf5dfa2.2a78a8",
+        "type": "mysql",
+        "z": "bdff3fd8.bc0d4",
+        "mydb": "cee63ff4.fc65e8",
+        "name": "WA",
+        "x": 350,
+        "y": 1420,
+        "wires": [
+            [
+                "56475606.a50458"
+            ]
+        ]
+    },
+    {
+        "id": "2823d1f2.a55d66",
+        "type": "function",
+        "z": "bdff3fd8.bc0d4",
+        "name": "Get Skills",
+        "func": "msg.topic = \"select * from user\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 200,
+        "y": 1420,
+        "wires": [
+            [
+                "9bf5dfa2.2a78a8"
+            ]
+        ]
+    },
+    {
+        "id": "56475606.a50458",
+        "type": "link out",
+        "z": "bdff3fd8.bc0d4",
+        "name": "Out Format",
+        "links": [
+            "c05b11b1.2fd4f8"
+        ],
+        "x": 475,
+        "y": 1420,
+        "wires": []
+    },
+    {
+        "id": "b81e2b0.66fe158",
+        "type": "comment",
+        "z": "bdff3fd8.bc0d4",
+        "name": "holt sich alle User/Employer",
+        "info": "",
+        "x": 130,
+        "y": 1340,
+        "wires": []
+    },
+    {
+        "id": "6ceca7a6.74e13",
+        "type": "http in",
+        "z": "bdff3fd8.bc0d4",
+        "name": "GetUserSkill",
+        "url": "/GetUserSkill",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 90,
+        "y": 1260,
+        "wires": [
+            [
+                "79126529.076274"
+            ]
+        ]
+    },
+    {
+        "id": "b6d190aa.476198",
+        "type": "mysql",
+        "z": "bdff3fd8.bc0d4",
+        "mydb": "cee63ff4.fc65e8",
+        "name": "WA",
+        "x": 370,
+        "y": 1260,
+        "wires": [
+            [
+                "6d7b38c9.8b8e3"
+            ]
+        ]
+    },
+    {
+        "id": "79126529.076274",
+        "type": "function",
+        "z": "bdff3fd8.bc0d4",
+        "name": "Get Skills",
+        "func": "msg.topic = \"select * from user_has_skill us, skills s where us.user_user_id ='\"+msg.payload.user+\"'\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 240,
+        "y": 1260,
+        "wires": [
+            [
+                "b6d190aa.476198"
+            ]
+        ]
+    },
+    {
+        "id": "6d7b38c9.8b8e3",
+        "type": "link out",
+        "z": "bdff3fd8.bc0d4",
+        "name": "Out Format",
+        "links": [
+            "c05b11b1.2fd4f8"
+        ],
+        "x": 465,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "b891c062.1afa4",
+        "type": "http in",
+        "z": "bdff3fd8.bc0d4",
+        "name": "GetSkill",
+        "url": "/GetSkill",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 70,
+        "y": 1300,
+        "wires": [
+            [
+                "e430da8f.01bd68"
+            ]
+        ]
+    },
+    {
+        "id": "ee56c0f0.b2bcf",
+        "type": "mysql",
+        "z": "bdff3fd8.bc0d4",
+        "mydb": "cee63ff4.fc65e8",
+        "name": "WA",
+        "x": 340,
+        "y": 1300,
+        "wires": [
+            [
+                "6ed46430.56297c"
+            ]
+        ]
+    },
+    {
+        "id": "e430da8f.01bd68",
+        "type": "function",
+        "z": "bdff3fd8.bc0d4",
+        "name": "Get Skills",
+        "func": "msg.topic = \"select * from skills\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 210,
+        "y": 1300,
+        "wires": [
+            [
+                "ee56c0f0.b2bcf"
+            ]
+        ]
+    },
+    {
+        "id": "6ed46430.56297c",
+        "type": "link out",
+        "z": "bdff3fd8.bc0d4",
+        "name": "Out Format",
+        "links": [
+            "c05b11b1.2fd4f8"
+        ],
+        "x": 465,
+        "y": 1300,
+        "wires": []
     },
     {
         "id": "cee63ff4.fc65e8",
