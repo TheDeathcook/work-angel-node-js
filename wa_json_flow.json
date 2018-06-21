@@ -1,32 +1,15 @@
 [
     {
-        "id": "bdff3fd8.bc0d4",
+        "id": "f83166b1.2d5248",
         "type": "tab",
         "label": "EIT62-WA Design",
         "disabled": false,
         "info": ""
     },
     {
-        "id": "dd9cbb7c.82c2c",
-        "type": "http in",
-        "z": "bdff3fd8.bc0d4",
-        "name": "RegiUser",
-        "url": "/regi",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 80,
-        "y": 320,
-        "wires": [
-            [
-                "8a535f6f.3f23d"
-            ]
-        ]
-    },
-    {
-        "id": "8a535f6f.3f23d",
+        "id": "2f1e4938.97d726",
         "type": "function",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Insert Data",
         "func": "//msg.topic = \"insert into user (lastname, forename, description, username, password, salt , userpicture) values ('\"+msg.payload.lastname+\"','\"+msg.payload.forename+\"','\"+msg.payload.description+\"','\"+msg.payload.username+\"','\"+msg.payload.password+\"','\"+msg.payload.salt+\"','\"+msg.payload.userpicture+\"')\";\nmsg.topic = \"insert into user (username, password) values ('\"+msg.payload.username+\"','\"+msg.payload.password+\"')\";\nreturn msg;",
         "outputs": 1,
@@ -35,28 +18,28 @@
         "y": 320,
         "wires": [
             [
-                "95201721.908eb"
+                "d89345d3.304498"
             ]
         ]
     },
     {
-        "id": "95201721.908eb",
+        "id": "d89345d3.304498",
         "type": "mysql",
-        "z": "bdff3fd8.bc0d4",
-        "mydb": "cee63ff4.fc65e8",
+        "z": "f83166b1.2d5248",
+        "mydb": "1c22e84f.c66778",
         "name": "WA",
         "x": 400,
         "y": 320,
         "wires": [
             [
-                "c9062c56.2deac8"
+                "7f9d1df0.d1b8a4"
             ]
         ]
     },
     {
-        "id": "7bf9eee8.9826e",
+        "id": "cc63a63f.243038",
         "type": "http in",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Matches",
         "url": "/matches",
         "method": "post",
@@ -66,14 +49,14 @@
         "y": 700,
         "wires": [
             [
-                "22a6cd05.476ed2"
+                "3b4d210d.24b17e"
             ]
         ]
     },
     {
-        "id": "22a6cd05.476ed2",
+        "id": "3b4d210d.24b17e",
         "type": "function",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Insert Matches",
         "func": "msg.topic = \"insert into matches (employer_employer_id,user_user_id,compability,user_accepted,employer_accepted) values('\"+msg.payload.employer_id+\"','\"+msg.payload.user_id+\"','\"+msg.payload.compability+\"','\"+msg.payload.user_accepted+\"','\"+msg.payload.employer_accepted+\"')\";\nreturn msg;",
         "outputs": 1,
@@ -82,28 +65,28 @@
         "y": 700,
         "wires": [
             [
-                "5aada1c4.6068a"
+                "7fee47e1.7b1598"
             ]
         ]
     },
     {
-        "id": "5aada1c4.6068a",
+        "id": "7fee47e1.7b1598",
         "type": "mysql",
-        "z": "bdff3fd8.bc0d4",
-        "mydb": "cee63ff4.fc65e8",
+        "z": "f83166b1.2d5248",
+        "mydb": "1c22e84f.c66778",
         "name": "WA",
         "x": 430,
         "y": 700,
         "wires": [
             [
-                "a048bf8b.9e9038"
+                "d4992201.d7f82"
             ]
         ]
     },
     {
-        "id": "644a73fc.4df86c",
+        "id": "53dc3be3.0bc094",
         "type": "http in",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Get Matches",
         "url": "/getMatches",
         "method": "post",
@@ -113,14 +96,14 @@
         "y": 760,
         "wires": [
             [
-                "2607eabf.5d0e66"
+                "8dd0d36e.a820e"
             ]
         ]
     },
     {
-        "id": "2607eabf.5d0e66",
+        "id": "8dd0d36e.a820e",
         "type": "function",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Get Matches ??",
         "func": "msg.topic = \"select * from matches where user_accepted = 'Y' and employer_accepted = 'Y'\"\nreturn msg;",
         "outputs": 1,
@@ -129,72 +112,72 @@
         "y": 760,
         "wires": [
             [
-                "696c8023.306798"
+                "65fa6bd9.0cd784"
             ]
         ]
     },
     {
-        "id": "696c8023.306798",
+        "id": "65fa6bd9.0cd784",
         "type": "mysql",
-        "z": "bdff3fd8.bc0d4",
-        "mydb": "cee63ff4.fc65e8",
+        "z": "f83166b1.2d5248",
+        "mydb": "1c22e84f.c66778",
         "name": "WA",
         "x": 430,
         "y": 760,
         "wires": [
             [
-                "a048bf8b.9e9038"
+                "d4992201.d7f82"
             ]
         ]
     },
     {
-        "id": "a048bf8b.9e9038",
+        "id": "d4992201.d7f82",
         "type": "link out",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Out Format",
         "links": [
-            "c05b11b1.2fd4f8"
+            "67eea7f0.aa42b8"
         ],
         "x": 555,
         "y": 740,
         "wires": []
     },
     {
-        "id": "c05b11b1.2fd4f8",
+        "id": "67eea7f0.aa42b8",
         "type": "link in",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "",
         "links": [
-            "a048bf8b.9e9038",
+            "d4992201.d7f82",
             "41b503ba.4f796c",
-            "c9062c56.2deac8",
+            "7f9d1df0.d1b8a4",
             "fd2ab185.e346f8",
             "6193a63f.a5b0d8",
-            "21a38900.3bf018",
+            "d392b9af.3e6688",
             "a435fbb7.4c747",
-            "8b74568a.be7e1",
-            "1f104b1.b6df035",
-            "2fc1fe86.00f75a",
-            "6c8d9306.13961c",
+            "862dce4a.8311",
+            "ca7a2703.aac0d8",
+            "cc2c9edd.96db4",
+            "d79e335c.a28ce",
             "b6dd63c3.2cfae",
-            "e23cc4ec.a2f0d",
-            "4d908666.ebd6",
-            "56475606.a50458",
-            "6d7b38c9.8b8e3",
-            "6ed46430.56297c"
+            "510dfaee.0fafe4",
+            "55b5b112.4f54",
+            "74f18bc7.017974",
+            "4db7fb14.6e2384",
+            "2a2f6156.5640ae"
         ],
         "x": 995,
         "y": 280,
         "wires": [
             [
-                "198f209e.b778bf"
+                "c235fc1f.b7b38"
             ]
         ]
     },
     {
-        "id": "f877fc3b.610bc8",
+        "id": "3d54d6d8.9c3aba",
         "type": "http response",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -203,9 +186,9 @@
         "wires": []
     },
     {
-        "id": "198f209e.b778bf",
+        "id": "c235fc1f.b7b38",
         "type": "json",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "",
         "property": "payload",
         "action": "",
@@ -214,26 +197,26 @@
         "y": 280,
         "wires": [
             [
-                "f877fc3b.610bc8"
+                "3d54d6d8.9c3aba"
             ]
         ]
     },
     {
-        "id": "c9062c56.2deac8",
+        "id": "7f9d1df0.d1b8a4",
         "type": "link out",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Out Format",
         "links": [
-            "c05b11b1.2fd4f8"
+            "67eea7f0.aa42b8"
         ],
         "x": 535,
         "y": 340,
         "wires": []
     },
     {
-        "id": "453fd240.9e0b2c",
+        "id": "b9259400.6e9ed8",
         "type": "http in",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "RegiEmp",
         "url": "/regiemployee",
         "method": "post",
@@ -243,14 +226,14 @@
         "y": 380,
         "wires": [
             [
-                "19e4309a.ffc097"
+                "7685848a.2fd61c"
             ]
         ]
     },
     {
-        "id": "19e4309a.ffc097",
+        "id": "7685848a.2fd61c",
         "type": "function",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Insert Data",
         "func": "//msg.topic = \"insert into employer (name,username,password,salt,employerpicture,description) values ('\"+msg.payload.name+\"','\"+msg.payload.username+\"','\"+msg.payload.password+\"','\"+msg.payload.salt+\"','\"+msg.payload.employerpicture+\"','\"+msg.payload.description+\"')\";\nmsg.topic = \"insert into employer (username, password) values ('\"+msg.payload.username+\"','\"+msg.payload.password+\"')\";\nreturn msg;",
         "outputs": 1,
@@ -259,28 +242,28 @@
         "y": 380,
         "wires": [
             [
-                "f5831746.ba4a7"
+                "6c9698af.425cb8"
             ]
         ]
     },
     {
-        "id": "f5831746.ba4a7",
+        "id": "6c9698af.425cb8",
         "type": "mysql",
-        "z": "bdff3fd8.bc0d4",
-        "mydb": "cee63ff4.fc65e8",
+        "z": "f83166b1.2d5248",
+        "mydb": "1c22e84f.c66778",
         "name": "WA",
         "x": 400,
         "y": 380,
         "wires": [
             [
-                "c9062c56.2deac8"
+                "7f9d1df0.d1b8a4"
             ]
         ]
     },
     {
-        "id": "3be39fda.69a3e",
+        "id": "58ff10c8.09168",
         "type": "http in",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "DeleteUser",
         "url": "/deleteUser",
         "method": "post",
@@ -290,14 +273,14 @@
         "y": 900,
         "wires": [
             [
-                "c53898ac.06b4f8"
+                "fa1ffe21.1f571"
             ]
         ]
     },
     {
-        "id": "c53898ac.06b4f8",
+        "id": "fa1ffe21.1f571",
         "type": "function",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Delete User",
         "func": "msg.topic = \"delete from user where username = '\"+msg.payload.user+\"'\";\nreturn msg;",
         "outputs": 1,
@@ -306,28 +289,28 @@
         "y": 900,
         "wires": [
             [
-                "79663101.6c8a1"
+                "af04481a.906c38"
             ]
         ]
     },
     {
-        "id": "79663101.6c8a1",
+        "id": "af04481a.906c38",
         "type": "mysql",
-        "z": "bdff3fd8.bc0d4",
-        "mydb": "cee63ff4.fc65e8",
+        "z": "f83166b1.2d5248",
+        "mydb": "1c22e84f.c66778",
         "name": "WA",
         "x": 400,
         "y": 900,
         "wires": [
             [
-                "21a38900.3bf018"
+                "d392b9af.3e6688"
             ]
         ]
     },
     {
-        "id": "558c6d8d.cb35cc",
+        "id": "6bd789d.69e9378",
         "type": "http in",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "DeleteEmp",
         "url": "/DeleteEmployer",
         "method": "post",
@@ -337,14 +320,14 @@
         "y": 960,
         "wires": [
             [
-                "13bbcc2e.83275c"
+                "fb79d4cf.c049f8"
             ]
         ]
     },
     {
-        "id": "13bbcc2e.83275c",
+        "id": "fb79d4cf.c049f8",
         "type": "function",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Delete Employee",
         "func": "msg.topic = \"delete from employer where username = '\" + msg.payload.employer+\"'\";\nreturn msg;",
         "outputs": 1,
@@ -353,40 +336,40 @@
         "y": 960,
         "wires": [
             [
-                "17a2aa57.80b546"
+                "9b103d0.6bb94c"
             ]
         ]
     },
     {
-        "id": "17a2aa57.80b546",
+        "id": "9b103d0.6bb94c",
         "type": "mysql",
-        "z": "bdff3fd8.bc0d4",
-        "mydb": "cee63ff4.fc65e8",
+        "z": "f83166b1.2d5248",
+        "mydb": "1c22e84f.c66778",
         "name": "WA",
         "x": 430,
         "y": 960,
         "wires": [
             [
-                "21a38900.3bf018"
+                "d392b9af.3e6688"
             ]
         ]
     },
     {
-        "id": "21a38900.3bf018",
+        "id": "d392b9af.3e6688",
         "type": "link out",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Out Format",
         "links": [
-            "c05b11b1.2fd4f8"
+            "67eea7f0.aa42b8"
         ],
         "x": 555,
         "y": 900,
         "wires": []
     },
     {
-        "id": "9ad1c081.4a44c8",
+        "id": "f462479b.079be8",
         "type": "http in",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "AddSkill",
         "url": "/AddSkill",
         "method": "post",
@@ -396,14 +379,14 @@
         "y": 1080,
         "wires": [
             [
-                "5d3cd54f.a6049c"
+                "3f92cdc4.b4ccc2"
             ]
         ]
     },
     {
-        "id": "5d3cd54f.a6049c",
+        "id": "3f92cdc4.b4ccc2",
         "type": "function",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Add Skill",
         "func": "msg.topic = \"insert into user_has_skill (user_user_id,skill_skill_id,level) values ('\"+msg.payload.user_id+\"','\"+msg.payload.skill_id+\"','\"+msg.payload.level+\"')\";\nreturn msg;",
         "outputs": 1,
@@ -412,40 +395,40 @@
         "y": 1080,
         "wires": [
             [
-                "4dad9196.d6c758"
+                "afb9a730.c5bca8"
             ]
         ]
     },
     {
-        "id": "4dad9196.d6c758",
+        "id": "afb9a730.c5bca8",
         "type": "mysql",
-        "z": "bdff3fd8.bc0d4",
-        "mydb": "cee63ff4.fc65e8",
+        "z": "f83166b1.2d5248",
+        "mydb": "1c22e84f.c66778",
         "name": "WA",
         "x": 400,
         "y": 1080,
         "wires": [
             [
-                "8b74568a.be7e1"
+                "862dce4a.8311"
             ]
         ]
     },
     {
-        "id": "8b74568a.be7e1",
+        "id": "862dce4a.8311",
         "type": "link out",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Out Format",
         "links": [
-            "c05b11b1.2fd4f8"
+            "67eea7f0.aa42b8"
         ],
         "x": 505,
         "y": 1080,
         "wires": []
     },
     {
-        "id": "ca4bf0de.02fc6",
+        "id": "9d33128c.489ab",
         "type": "http in",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "GetEmpSkill",
         "url": "/GetEmpSkill",
         "method": "post",
@@ -455,56 +438,58 @@
         "y": 1220,
         "wires": [
             [
-                "8cf79308.3f007"
+                "42115a5b.ba2d24"
             ]
         ]
     },
     {
-        "id": "61fe95d1.c9aad4",
+        "id": "f0ba73b9.0d348",
         "type": "mysql",
-        "z": "bdff3fd8.bc0d4",
-        "mydb": "cee63ff4.fc65e8",
+        "z": "f83166b1.2d5248",
+        "mydb": "1c22e84f.c66778",
         "name": "WA",
         "x": 370,
         "y": 1220,
         "wires": [
             [
-                "1f104b1.b6df035"
+                "ca7a2703.aac0d8",
+                "46a93187.cedaf"
             ]
         ]
     },
     {
-        "id": "8cf79308.3f007",
+        "id": "42115a5b.ba2d24",
         "type": "function",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Get Skills",
-        "func": "msg.topic = \"select * from employer_needs_skills es, skills s where es.employer_employer_id ='\"+msg.payload.emp+\"'\";\nreturn msg;",
+        "func": "msg.topic = \"select s.* from employer_needs_skill es inner join skill s on es.skill_skill_id = s.skill_id and es.employer_employer_id = \"+ msg.payload.emp\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 240,
         "y": 1220,
         "wires": [
             [
-                "61fe95d1.c9aad4"
+                "f0ba73b9.0d348",
+                "46a93187.cedaf"
             ]
         ]
     },
     {
-        "id": "1f104b1.b6df035",
+        "id": "ca7a2703.aac0d8",
         "type": "link out",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Out Format",
         "links": [
-            "c05b11b1.2fd4f8"
+            "67eea7f0.aa42b8"
         ],
         "x": 465,
         "y": 1220,
         "wires": []
     },
     {
-        "id": "863268bf.ea851",
+        "id": "f3d016df.b3bdf8",
         "type": "http in",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "EmployerSkill",
         "url": "/AddEmpSkill",
         "method": "post",
@@ -514,14 +499,14 @@
         "y": 1120,
         "wires": [
             [
-                "512529d4.a2f308"
+                "6182dda6.f5f9b4"
             ]
         ]
     },
     {
-        "id": "512529d4.a2f308",
+        "id": "6182dda6.f5f9b4",
         "type": "function",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Add Skill",
         "func": "msg.topic = \"insert into employer_needs_skill (employer_employer_id,skill_skill_id) values ('\"+msg.payload.employer_id+\"','\"+msg.payload.skill_id+\"')\";\nreturn msg;",
         "outputs": 1,
@@ -530,40 +515,40 @@
         "y": 1120,
         "wires": [
             [
-                "3e06d114.7ab8c6"
+                "e06e230a.8a3dc"
             ]
         ]
     },
     {
-        "id": "3e06d114.7ab8c6",
+        "id": "e06e230a.8a3dc",
         "type": "mysql",
-        "z": "bdff3fd8.bc0d4",
-        "mydb": "cee63ff4.fc65e8",
+        "z": "f83166b1.2d5248",
+        "mydb": "1c22e84f.c66778",
         "name": "WA",
         "x": 390,
         "y": 1120,
         "wires": [
             [
-                "2fc1fe86.00f75a"
+                "cc2c9edd.96db4"
             ]
         ]
     },
     {
-        "id": "2fc1fe86.00f75a",
+        "id": "cc2c9edd.96db4",
         "type": "link out",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Out Format",
         "links": [
-            "c05b11b1.2fd4f8"
+            "67eea7f0.aa42b8"
         ],
         "x": 495,
         "y": 1120,
         "wires": []
     },
     {
-        "id": "c1a5807d.cd6c18",
+        "id": "20b4a459.b9ab9c",
         "type": "http in",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "UpdateEmployer",
         "url": "/setDataEmp",
         "method": "post",
@@ -573,14 +558,14 @@
         "y": 580,
         "wires": [
             [
-                "80dac2b7.00808"
+                "efdf92fd.89024"
             ]
         ]
     },
     {
-        "id": "c8b4b135.cfd3a8",
+        "id": "53a55df6.106ce4",
         "type": "http in",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "UpdateUser",
         "url": "/setDataUser",
         "method": "post",
@@ -590,30 +575,30 @@
         "y": 500,
         "wires": [
             [
-                "efdc255.e74a0d8"
+                "c08d4298.7f5a8"
             ]
         ]
     },
     {
-        "id": "efdc255.e74a0d8",
+        "id": "c08d4298.7f5a8",
         "type": "function",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "",
-        "func": "msg.topic = \"update user set lastname = '\"+msg.payload.lastname+\"', forename = '\"+msg.payload.forename+\"', description = '\"+msg.payload.descr+\"', userpicture = '\"+msg.payload.userpicture+\"', salt = '\"+msg.payload.salt+ \"' where username = '\"+msg.payload.username+\"'\";\nreturn msg;",
+        "func": "\nmsg.topic = \"update user set lastname = '\"+msg.payload.lastname+\"', forename = '\"+msg.payload.forename+\"', description = '\"+msg.payload.descr+\"', userpicture = '\"+msg.payload.userpicture+\"', salt = '\"+msg.payload.salt+ \"' where username = '\"+msg.payload.username+\"'\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 270,
         "y": 500,
         "wires": [
             [
-                "ad40322f.a84cd8"
+                "b4b4491.b906cb8"
             ]
         ]
     },
     {
-        "id": "80dac2b7.00808",
+        "id": "efdf92fd.89024",
         "type": "function",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "",
         "func": "msg.topic = \"update employer set name = '\"+msg.payload.name+\"', employerpicture = '\"+msg.payload.employerpicture+\"', description = '\"+msg.payload.descr+\"', salt = '\"+msg.payload.salt+\"' where username = '\"+msg.payload.employername+\"'\";\nreturn msg;",
         "outputs": 1,
@@ -622,54 +607,54 @@
         "y": 580,
         "wires": [
             [
-                "3c068361.7b50ac"
+                "2e44ae0c.a950a2"
             ]
         ]
     },
     {
-        "id": "ad40322f.a84cd8",
+        "id": "b4b4491.b906cb8",
         "type": "mysql",
-        "z": "bdff3fd8.bc0d4",
-        "mydb": "cee63ff4.fc65e8",
+        "z": "f83166b1.2d5248",
+        "mydb": "1c22e84f.c66778",
         "name": "WA",
         "x": 430,
         "y": 500,
         "wires": [
             [
-                "6c8d9306.13961c"
+                "d79e335c.a28ce"
             ]
         ]
     },
     {
-        "id": "3c068361.7b50ac",
+        "id": "2e44ae0c.a950a2",
         "type": "mysql",
-        "z": "bdff3fd8.bc0d4",
-        "mydb": "cee63ff4.fc65e8",
+        "z": "f83166b1.2d5248",
+        "mydb": "1c22e84f.c66778",
         "name": "WA",
         "x": 430,
         "y": 580,
         "wires": [
             [
-                "6c8d9306.13961c"
+                "d79e335c.a28ce"
             ]
         ]
     },
     {
-        "id": "6c8d9306.13961c",
+        "id": "d79e335c.a28ce",
         "type": "link out",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Out Format",
         "links": [
-            "c05b11b1.2fd4f8"
+            "67eea7f0.aa42b8"
         ],
         "x": 555,
         "y": 540,
         "wires": []
     },
     {
-        "id": "3d79a745.524558",
+        "id": "736cd8d3.d78118",
         "type": "http in",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Login",
         "url": "/login",
         "method": "post",
@@ -679,56 +664,56 @@
         "y": 200,
         "wires": [
             [
-                "81b6c971.e6f3f"
+                "c7544d8e.ab2a7"
             ]
         ]
     },
     {
-        "id": "81b6c971.e6f3f",
+        "id": "c7544d8e.ab2a7",
         "type": "function",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Select user",
-        "func": "msg.topic = \"select * from employer e, user u where u.username = '\"+ msg.payload.username + \"' or e.username = '\" + msg.payload.username + \"'\";\nreturn msg;",
+        "func": "msg.topic = \"select * from user u where u.username = '\"+ msg.payload.username + \"'\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 270,
         "y": 200,
         "wires": [
             [
-                "c1778197.728728"
+                "a87a02bc.b95ae"
             ]
         ]
     },
     {
-        "id": "c1778197.728728",
+        "id": "a87a02bc.b95ae",
         "type": "mysql",
-        "z": "bdff3fd8.bc0d4",
-        "mydb": "cee63ff4.fc65e8",
+        "z": "f83166b1.2d5248",
+        "mydb": "1c22e84f.c66778",
         "name": "WA",
         "x": 410,
         "y": 200,
         "wires": [
             [
-                "e23cc4ec.a2f0d"
+                "510dfaee.0fafe4"
             ]
         ]
     },
     {
-        "id": "e23cc4ec.a2f0d",
+        "id": "510dfaee.0fafe4",
         "type": "link out",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Out Format",
         "links": [
-            "c05b11b1.2fd4f8"
+            "67eea7f0.aa42b8"
         ],
         "x": 515,
         "y": 200,
         "wires": []
     },
     {
-        "id": "f409c487.6888f",
+        "id": "38ad371f.4abfe8",
         "type": "inject",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "",
         "topic": "",
         "payload": "",
@@ -741,14 +726,14 @@
         "y": 60,
         "wires": [
             [
-                "a110f14e.9a03e"
+                "82a069c0.a08ad8"
             ]
         ]
     },
     {
-        "id": "a110f14e.9a03e",
+        "id": "82a069c0.a08ad8",
         "type": "function",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "delete matches",
         "func": "msg.topic = \"delete from matches where user_accepted is not true or employer_accepted is not true\";\nreturn msg;",
         "outputs": 1,
@@ -757,15 +742,15 @@
         "y": 60,
         "wires": [
             [
-                "434db126.2ab6b8"
+                "8de22c0.c3fd4d8"
             ]
         ]
     },
     {
-        "id": "434db126.2ab6b8",
+        "id": "8de22c0.c3fd4d8",
         "type": "mysql",
-        "z": "bdff3fd8.bc0d4",
-        "mydb": "cee63ff4.fc65e8",
+        "z": "f83166b1.2d5248",
+        "mydb": "1c22e84f.c66778",
         "name": "WA",
         "x": 490,
         "y": 60,
@@ -774,9 +759,9 @@
         ]
     },
     {
-        "id": "3e7fbc62.d41f34",
+        "id": "c74a5b8d.8011b8",
         "type": "comment",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Loescht die matches nach 24h, wenn der user und employer nicht akpzeptiert hat",
         "info": "",
         "x": 320,
@@ -784,9 +769,9 @@
         "wires": []
     },
     {
-        "id": "9f885617.1334b8",
+        "id": "1cb6cb45.21f335",
         "type": "comment",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Login fuer den User & Employer",
         "info": "",
         "x": 160,
@@ -794,9 +779,9 @@
         "wires": []
     },
     {
-        "id": "f6f71dd0.91be2",
+        "id": "b5f47ac6.e54778",
         "type": "comment",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Registierung fuer den User & Employer",
         "info": "",
         "x": 170,
@@ -804,9 +789,9 @@
         "wires": []
     },
     {
-        "id": "f8f9f7ec.0f6c2",
+        "id": "f727b53b.b84ab8",
         "type": "comment",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Update die Daten fuer den User, wenn der diese aendern moechte",
         "info": "",
         "x": 260,
@@ -814,9 +799,9 @@
         "wires": []
     },
     {
-        "id": "24d1bc40.99d7e4",
+        "id": "e499f2c0.dfba4",
         "type": "comment",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Einfuegen/Holt sich die Matches",
         "info": "",
         "x": 150,
@@ -824,9 +809,9 @@
         "wires": []
     },
     {
-        "id": "937aabb1.5eea38",
+        "id": "511adfaa.96ca4",
         "type": "comment",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Zum loeschen der Daten vom User/Employer",
         "info": "",
         "x": 190,
@@ -834,9 +819,9 @@
         "wires": []
     },
     {
-        "id": "42f71c03.784c3c",
+        "id": "a63c2286.51871",
         "type": "comment",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Fuegt die ausgewaehlten Skill zu den User/Employer",
         "info": "",
         "x": 210,
@@ -844,9 +829,9 @@
         "wires": []
     },
     {
-        "id": "d1837fb1.2488d",
+        "id": "d28236e9.b96bf8",
         "type": "comment",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Holt sich die Skills",
         "info": "",
         "x": 110,
@@ -854,9 +839,9 @@
         "wires": []
     },
     {
-        "id": "91de3da7.507848",
+        "id": "13c71d6e.d344c3",
         "type": "http in",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "GetEmp",
         "url": "/getAllEmp",
         "method": "post",
@@ -866,28 +851,28 @@
         "y": 1380,
         "wires": [
             [
-                "83e0bdfc.6f42a8"
+                "219bee1f.060fe2"
             ]
         ]
     },
     {
-        "id": "58a63a90.2bad5c",
+        "id": "4298c9fb.007178",
         "type": "mysql",
-        "z": "bdff3fd8.bc0d4",
-        "mydb": "cee63ff4.fc65e8",
+        "z": "f83166b1.2d5248",
+        "mydb": "1c22e84f.c66778",
         "name": "WA",
         "x": 350,
         "y": 1380,
         "wires": [
             [
-                "4d908666.ebd6"
+                "55b5b112.4f54"
             ]
         ]
     },
     {
-        "id": "83e0bdfc.6f42a8",
+        "id": "219bee1f.060fe2",
         "type": "function",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Get Skills",
         "func": "msg.topic = \"select * from employer\";\nreturn msg;",
         "outputs": 1,
@@ -896,26 +881,26 @@
         "y": 1380,
         "wires": [
             [
-                "58a63a90.2bad5c"
+                "4298c9fb.007178"
             ]
         ]
     },
     {
-        "id": "4d908666.ebd6",
+        "id": "55b5b112.4f54",
         "type": "link out",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Out Format",
         "links": [
-            "c05b11b1.2fd4f8"
+            "67eea7f0.aa42b8"
         ],
         "x": 475,
         "y": 1380,
         "wires": []
     },
     {
-        "id": "a5979aa4.7fd7d",
+        "id": "d601e63c.349a38",
         "type": "http in",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "GetUser",
         "url": "/getAllUser",
         "method": "post",
@@ -925,28 +910,28 @@
         "y": 1420,
         "wires": [
             [
-                "2823d1f2.a55d66"
+                "de625ede.99a95"
             ]
         ]
     },
     {
-        "id": "9bf5dfa2.2a78a8",
+        "id": "48b8e249.6a584c",
         "type": "mysql",
-        "z": "bdff3fd8.bc0d4",
-        "mydb": "cee63ff4.fc65e8",
+        "z": "f83166b1.2d5248",
+        "mydb": "1c22e84f.c66778",
         "name": "WA",
         "x": 350,
         "y": 1420,
         "wires": [
             [
-                "56475606.a50458"
+                "74f18bc7.017974"
             ]
         ]
     },
     {
-        "id": "2823d1f2.a55d66",
+        "id": "de625ede.99a95",
         "type": "function",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Get Skills",
         "func": "msg.topic = \"select * from user\";\nreturn msg;",
         "outputs": 1,
@@ -955,26 +940,26 @@
         "y": 1420,
         "wires": [
             [
-                "9bf5dfa2.2a78a8"
+                "48b8e249.6a584c"
             ]
         ]
     },
     {
-        "id": "56475606.a50458",
+        "id": "74f18bc7.017974",
         "type": "link out",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Out Format",
         "links": [
-            "c05b11b1.2fd4f8"
+            "67eea7f0.aa42b8"
         ],
         "x": 475,
         "y": 1420,
         "wires": []
     },
     {
-        "id": "b81e2b0.66fe158",
+        "id": "545ca087.bd7",
         "type": "comment",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "holt sich alle User/Employer",
         "info": "",
         "x": 130,
@@ -982,9 +967,9 @@
         "wires": []
     },
     {
-        "id": "6ceca7a6.74e13",
+        "id": "1a0a6580.1faa8b",
         "type": "http in",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "GetUserSkill",
         "url": "/GetUserSkill",
         "method": "post",
@@ -994,56 +979,58 @@
         "y": 1260,
         "wires": [
             [
-                "79126529.076274"
+                "83fc7dd8.4b62b"
             ]
         ]
     },
     {
-        "id": "b6d190aa.476198",
+        "id": "ade47fa8.6ad2f",
         "type": "mysql",
-        "z": "bdff3fd8.bc0d4",
-        "mydb": "cee63ff4.fc65e8",
+        "z": "f83166b1.2d5248",
+        "mydb": "1c22e84f.c66778",
         "name": "WA",
         "x": 370,
         "y": 1260,
         "wires": [
             [
-                "6d7b38c9.8b8e3"
+                "4db7fb14.6e2384",
+                "46a93187.cedaf"
             ]
         ]
     },
     {
-        "id": "79126529.076274",
+        "id": "83fc7dd8.4b62b",
         "type": "function",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Get Skills",
-        "func": "msg.topic = \"select * from user_has_skill us, skills s where us.user_user_id ='\"+msg.payload.user+\"'\";\nreturn msg;",
+        "func": "msg.topic = \"select s.* from user_has_skill us inner join skill s on us.skill_skill_id = s.skill_id and us.user_user_id = \"+ msg.payload.user\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 240,
         "y": 1260,
         "wires": [
             [
-                "b6d190aa.476198"
+                "ade47fa8.6ad2f",
+                "46a93187.cedaf"
             ]
         ]
     },
     {
-        "id": "6d7b38c9.8b8e3",
+        "id": "4db7fb14.6e2384",
         "type": "link out",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Out Format",
         "links": [
-            "c05b11b1.2fd4f8"
+            "67eea7f0.aa42b8"
         ],
         "x": 465,
         "y": 1260,
         "wires": []
     },
     {
-        "id": "b891c062.1afa4",
+        "id": "b8394ded.28e17",
         "type": "http in",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "GetSkill",
         "url": "/GetSkill",
         "method": "post",
@@ -1053,54 +1040,87 @@
         "y": 1300,
         "wires": [
             [
-                "e430da8f.01bd68"
+                "b308f916.72c878"
             ]
         ]
     },
     {
-        "id": "ee56c0f0.b2bcf",
+        "id": "f61644d3.e29b38",
         "type": "mysql",
-        "z": "bdff3fd8.bc0d4",
-        "mydb": "cee63ff4.fc65e8",
+        "z": "f83166b1.2d5248",
+        "mydb": "1c22e84f.c66778",
         "name": "WA",
         "x": 340,
         "y": 1300,
         "wires": [
             [
-                "6ed46430.56297c"
+                "2a2f6156.5640ae",
+                "46a93187.cedaf"
             ]
         ]
     },
     {
-        "id": "e430da8f.01bd68",
+        "id": "b308f916.72c878",
         "type": "function",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Get Skills",
-        "func": "msg.topic = \"select * from skills\";\nreturn msg;",
+        "func": "msg.topic = \"select * from skill\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 210,
         "y": 1300,
         "wires": [
             [
-                "ee56c0f0.b2bcf"
+                "f61644d3.e29b38",
+                "46a93187.cedaf"
             ]
         ]
     },
     {
-        "id": "6ed46430.56297c",
+        "id": "2a2f6156.5640ae",
         "type": "link out",
-        "z": "bdff3fd8.bc0d4",
+        "z": "f83166b1.2d5248",
         "name": "Out Format",
         "links": [
-            "c05b11b1.2fd4f8"
+            "67eea7f0.aa42b8"
         ],
         "x": 465,
         "y": 1300,
         "wires": []
     },
     {
-        "id": "cee63ff4.fc65e8",
+        "id": "ee836659.064fb8",
+        "type": "http in",
+        "z": "f83166b1.2d5248",
+        "name": "RegiUser",
+        "url": "/regi",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 80,
+        "y": 320,
+        "wires": [
+            [
+                "2f1e4938.97d726"
+            ]
+        ]
+    },
+    {
+        "id": "46a93187.cedaf",
+        "type": "debug",
+        "z": "f83166b1.2d5248",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 660,
+        "y": 1300,
+        "wires": []
+    },
+    {
+        "id": "1c22e84f.c66778",
         "type": "MySQLdatabase",
         "z": "",
         "host": "127.0.0.1",
