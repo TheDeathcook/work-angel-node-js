@@ -81,9 +81,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `work_angel_db`.`Match`
+-- Table `work_angel_db`.`Matches`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `work_angel_db`.`Match` (
+CREATE TABLE IF NOT EXISTS `work_angel_db`.`Matches` (
   `Employer_Employer_ID` INT NOT NULL,
   `User_User_ID` INT(11) NOT NULL,
   `Compability` INT NULL,
