@@ -14,114 +14,114 @@ CREATE SCHEMA IF NOT EXISTS `work_angel_db` DEFAULT CHARACTER SET utf8 ;
 USE `work_angel_db` ;
 
 -- -----------------------------------------------------
--- Table `work_angel_db`.`User`
+-- Table `work_angel_db`.`user`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `work_angel_db`.`User` (
-  `User_ID` INT(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `work_angel_db`.`user` (
+  `user_ID` INT(11) NOT NULL AUTO_INCREMENT,
   `Lastname` VARCHAR(45) NULL,
   `Forename` VARCHAR(45) NULL,
-  `Description` VARCHAR(500) NULL,
-  `Username` VARCHAR(45) NOT NULL,
-  `Password` VARCHAR(45) NOT NULL,
+  `description` VARCHAR(500) NULL,
+  `username` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
   `SALT` VARCHAR(45) NULL,
-  `UserPicture` BLOB(32000000) NULL,
-  PRIMARY KEY (`User_ID`),
-  UNIQUE INDEX `Username_UNIQUE` (`Username` ASC))
+  `userPicture` BLOB(32000000) NULL,
+  PRIMARY KEY (`user_ID`),
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `work_angel_db`.`Employer`
+-- Table `work_angel_db`.`employer`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `work_angel_db`.`Employer` (
-  `Employer_ID` INT NOT NULL AUTO_INCREMENT,
-  `Name` VARCHAR(45) NULL,
-  `Username` VARCHAR(45) NULL,
-  `Password` VARCHAR(45) NULL,
+CREATE TABLE IF NOT EXISTS `work_angel_db`.`employer` (
+  `employer_ID` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL,
+  `username` VARCHAR(45) NULL,
+  `password` VARCHAR(45) NULL,
   `SALT` VARCHAR(45) NULL,
-  `EmployerPicture` BLOB(32000000) NULL,
-  `Description` VARCHAR(500) NULL,
-  PRIMARY KEY (`Employer_ID`))
+  `employerPicture` BLOB(32000000) NULL,
+  `description` VARCHAR(500) NULL,
+  PRIMARY KEY (`employer_ID`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `work_angel_db`.`Skill`
+-- Table `work_angel_db`.`skill`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `work_angel_db`.`Skill` (
-  `Skill_ID` INT NOT NULL AUTO_INCREMENT,
-  `Name` VARCHAR(45) NULL,
-  `Description` VARCHAR(45) NULL,
-  PRIMARY KEY (`Skill_ID`))
+CREATE TABLE IF NOT EXISTS `work_angel_db`.`skill` (
+  `skill_ID` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL,
+  `description` VARCHAR(45) NULL,
+  PRIMARY KEY (`skill_ID`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `work_angel_db`.`User_has_Skill`
+-- Table `work_angel_db`.`user_has_skill`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `work_angel_db`.`User_has_Skill` (
-  `User_User_ID` INT(11) NOT NULL,
-  `Skill_Skill_ID` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `work_angel_db`.`user_has_skill` (
+  `user_user_ID` INT(11) NOT NULL,
+  `skill_skill_ID` INT NOT NULL,
   `Level` INT(1) NULL,
-  PRIMARY KEY (`User_User_ID`, `Skill_Skill_ID`),
-  INDEX `fk_User_has_Skills_Skills1_idx` (`Skill_Skill_ID` ASC),
-  INDEX `fk_User_has_Skills_User_idx` (`User_User_ID` ASC),
-  CONSTRAINT `fk_User_has_Skills_User`
-    FOREIGN KEY (`User_User_ID`)
-    REFERENCES `work_angel_db`.`User` (`User_ID`)
+  PRIMARY KEY (`user_user_ID`, `skill_skill_ID`),
+  INDEX `fk_user_has_skills_skills1_idx` (`skill_skill_ID` ASC),
+  INDEX `fk_user_has_skills_user_idx` (`user_user_ID` ASC),
+  CONSTRAINT `fk_user_has_skills_user`
+    FOREIGN KEY (`user_user_ID`)
+    REFERENCES `work_angel_db`.`user` (`user_ID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-  CONSTRAINT `fk_User_has_Skills_Skills1`
-    FOREIGN KEY (`Skill_Skill_ID`)
-    REFERENCES `work_angel_db`.`Skill` (`Skill_ID`)
+  CONSTRAINT `fk_user_has_skills_skills1`
+    FOREIGN KEY (`skill_skill_ID`)
+    REFERENCES `work_angel_db`.`skill` (`skill_ID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `work_angel_db`.`Matches`
+-- Table `work_angel_db`.`matches`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `work_angel_db`.`Matches` (
-  `Employer_Employer_ID` INT NOT NULL,
-  `User_User_ID` INT(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `work_angel_db`.`matches` (
+  `employer_employer_ID` INT NOT NULL,
+  `user_user_ID` INT(11) NOT NULL,
   `Compability` INT NULL,
-  `User_Accepted` BIT NULL,
-  `Employer_Accepted` BIT NULL,
-  PRIMARY KEY (`Employer_Employer_ID`, `User_User_ID`),
-  INDEX `fk_Employer_has_User_User1_idx` (`User_User_ID` ASC),
-  INDEX `fk_Employer_has_User_Employer1_idx` (`Employer_Employer_ID` ASC),
-  CONSTRAINT `fk_Employer_has_User_Employer1`
-    FOREIGN KEY (`Employer_Employer_ID`)
-    REFERENCES `work_angel_db`.`Employer` (`Employer_ID`)
+  `user_accepted` BIT NULL,
+  `employer_accepted` BIT NULL,
+  PRIMARY KEY (`employer_employer_ID`, `user_user_ID`),
+  INDEX `fk_employer_has_user_user1_idx` (`user_user_ID` ASC),
+  INDEX `fk_employer_has_user_employer1_idx` (`employer_employer_ID` ASC),
+  CONSTRAINT `fk_employer_has_user_employer1`
+    FOREIGN KEY (`employer_employer_ID`)
+    REFERENCES `work_angel_db`.`employer` (`employer_ID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-  CONSTRAINT `fk_Employer_has_User_User1`
-    FOREIGN KEY (`User_User_ID`)
-    REFERENCES `work_angel_db`.`User` (`User_ID`)
+  CONSTRAINT `fk_employer_has_user_user1`
+    FOREIGN KEY (`user_user_ID`)
+    REFERENCES `work_angel_db`.`user` (`user_ID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `work_angel_db`.`Employer_needs_Skill`
+-- Table `work_angel_db`.`employer_needs_skill`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `work_angel_db`.`Employer_needs_Skill` (
-  `Employer_Employer_ID` INT NOT NULL,
-  `Skill_Skill_ID` INT NOT NULL,
-  PRIMARY KEY (`Employer_Employer_ID`, `Skill_Skill_ID`),
-  INDEX `fk_Employer_has_Skills_Skills1_idx` (`Skill_Skill_ID` ASC),
-  INDEX `fk_Employer_has_Skills_Employer1_idx` (`Employer_Employer_ID` ASC),
-  CONSTRAINT `fk_Employer_has_Skills_Employer1`
-    FOREIGN KEY (`Employer_Employer_ID`)
-    REFERENCES `work_angel_db`.`Employer` (`Employer_ID`)
+CREATE TABLE IF NOT EXISTS `work_angel_db`.`employer_needs_skill` (
+  `employer_employer_ID` INT NOT NULL,
+  `skill_skill_ID` INT NOT NULL,
+  PRIMARY KEY (`employer_employer_ID`, `skill_skill_ID`),
+  INDEX `fk_employer_has_skills_skills1_idx` (`skill_skill_ID` ASC),
+  INDEX `fk_employer_has_skills_employer1_idx` (`employer_employer_ID` ASC),
+  CONSTRAINT `fk_employer_has_skills_employer1`
+    FOREIGN KEY (`employer_employer_ID`)
+    REFERENCES `work_angel_db`.`employer` (`employer_ID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-  CONSTRAINT `fk_Employer_has_Skills_Skills1`
-    FOREIGN KEY (`Skill_Skill_ID`)
-    REFERENCES `work_angel_db`.`Skill` (`Skill_ID`)
+  CONSTRAINT `fk_employer_has_skills_skills1`
+    FOREIGN KEY (`skill_skill_ID`)
+    REFERENCES `work_angel_db`.`skill` (`skill_ID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
