@@ -15,3 +15,18 @@ insert into Skill(Name,Description) values ('SQL','Writing of Scripts in Windows
 insert into Skill(Name,Description) values ('Windows Server 2012','Knowledge of Windows Server 2012');
 insert into Skill(Name,Description) values ('Design','Certain Knowledge about Designing Stuff');
 insert into Skill(Name,Description) values ('JAVA','Programming with JAVA');
+
+insert into user_has_skill values (1,1,1);
+insert into user_has_skill values (1,5,2);
+insert into user_has_skill values (2,3,1);
+insert into user_has_skill values (4,4,1);
+
+insert into employer_needs_skill values (1,5);
+insert into employer_needs_skill values (2,5);
+insert into employer_needs_skill values (3,5);
+insert into employer_needs_skill values (4,5);
+insert into employer_needs_skill values (5,5);
+insert into employer_needs_skill values (1,1);
+insert into employer_needs_skill values (2,2);
+insert into employer_needs_skill values (3,3);
+insert into employer_needs_skill values (4,4);
